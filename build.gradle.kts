@@ -1,7 +1,12 @@
+plugins {
+    id("com.github.ben-manes.versions").version("0.29.0")
+}
+
 val GROUP: String by project
 val VERSION_NAME: String by project
 
 allprojects {
+
     repositories {
         google()
         mavenCentral()

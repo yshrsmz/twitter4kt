@@ -7,9 +7,8 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven {
-        url = uri("https://dl.bintray.com/kotlin/kotlin-eap")
-    }
+    maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
+    maven { url = uri("https://kotlin.bintray.com/kotlinx/") }
 }
 kotlin {
     jvm {
@@ -47,6 +46,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:1.0-M1-1.4.0-rc")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8-1.4.0-rc")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
                 implementation("io.ktor:ktor-client-core:1.3.2-1.4.0-rc")
                 implementation("io.ktor:ktor-client-json:1.3.2-1.4.0-rc")
                 implementation("io.ktor:ktor-client-serialization:1.3.2-1.4.0-rc")

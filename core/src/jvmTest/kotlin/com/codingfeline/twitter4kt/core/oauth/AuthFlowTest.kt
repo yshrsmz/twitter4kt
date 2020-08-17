@@ -8,9 +8,9 @@ import org.junit.Test
 
 class AuthFlowTest {
 
-    val consumerKeys = ConsumerKeys(
-        apiKey = "",
-        apiKeySecret = ""
+    private val consumerKeys = ConsumerKeys(
+        apiKey = "SsQ2VDwWWulvoD1TANfTa1kiP",
+        apiKeySecret = "D5m8F2q1Xqk5X6ZJCiNigY1eLadNNcrLGGiQNXFwiOrfK7JhX6"
     )
 
     @Test

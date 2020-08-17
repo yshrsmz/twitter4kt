@@ -5,7 +5,6 @@ import com.codingfeline.twitter4kt.core.Urls
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.http.URLBuilder
-import io.ktor.util.Digest
 
 class AuthFlow(
     private val consumerKeys: ConsumerKeys,
@@ -16,7 +15,6 @@ class AuthFlow(
     }
 
     suspend fun fetchRequestToken(): RequestToken {
-        Digest()
         val url = URLBuilder(Urls.API_ENDPOINT)
             .path("oauth/request_token")
             .run {
