@@ -1,4 +1,4 @@
-package com.codingfeline.twitter4kt.core.oauth
+package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.getNonce

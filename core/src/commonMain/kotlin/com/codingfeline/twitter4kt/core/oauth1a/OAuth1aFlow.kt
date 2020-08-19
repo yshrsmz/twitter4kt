@@ -1,12 +1,12 @@
-package com.codingfeline.twitter4kt.core.oauth
+package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.Urls
-import io.ktor.client.HttpClient
-import io.ktor.client.request.post
-import io.ktor.http.URLBuilder
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.http.*
 
-class AuthFlow(
+class OAuth1aFlow(
     private val consumerKeys: ConsumerKeys,
     private val oAuthConfig: OAuthConfig = OAuthConfig()
 ) {

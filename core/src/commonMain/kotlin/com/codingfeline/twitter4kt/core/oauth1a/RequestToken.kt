@@ -1,4 +1,4 @@
-package com.codingfeline.twitter4kt.core.oauth
+package com.codingfeline.twitter4kt.core.oauth1a
 
 import io.ktor.http.Url
 import io.ktor.http.parametersOf

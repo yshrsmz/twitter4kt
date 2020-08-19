@@ -1,6 +1,8 @@
+import java.util.*
+
 plugins {
-    kotlin("multiplatform") version "1.4.0-rc"
-    kotlin("plugin.serialization") version "1.3.70"
+    kotlin("multiplatform") version "1.4.0"
+    kotlin("plugin.serialization") version "1.4.0"
 }
 group = "com.codingfeline"
 version = "1.0-SNAPSHOT"
@@ -16,6 +18,7 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
+    /*
     js {
         browser {
             testTask {
@@ -39,25 +42,28 @@ kotlin {
     if (isMacOs) {
         ios()
     }
-
+    */
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:1.0-M1-1.4.0-rc")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8-1.4.0-rc")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
-                implementation("io.ktor:ktor-client-core:1.3.2-1.4.0-rc")
-                implementation("io.ktor:ktor-client-json:1.3.2-1.4.0-rc")
-                implementation("io.ktor:ktor-client-serialization:1.3.2-1.4.0-rc")
-                implementation("io.ktor:ktor-client-logging:1.3.2-1.4.0-rc")
+                implementation("io.ktor:ktor-client-core:1.4.0")
+                implementation("io.ktor:ktor-client-json:1.4.0")
+                implementation("io.ktor:ktor-client-serialization:1.4.0")
+                implementation("io.ktor:ktor-client-logging:1.4.0")
             }
+
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
+            val genDir = file("${project.buildDir}/testconfig")
+            this.kotlin.srcDirs(genDir)
         }
         val jvmMain by getting {
             dependencies {
@@ -69,6 +75,7 @@ kotlin {
                 implementation(kotlin("test-junit"))
             }
         }
+        /*
         val jsMain by getting
         val jsTest by getting {
             dependencies {
@@ -77,5 +84,36 @@ kotlin {
         }
         val nativeMain by getting
         val nativeTest by getting
+         */
     }
 }
+
+tasks.create("createTestConfig") {
+    val secretsFile = rootDir.resolve("secrets.properties")
+    val secretProps = Properties()
+    secretProps.load(secretsFile.inputStream())
+
+    val outputDir = file("${project.buildDir}/testconfig")
+    val consumerKey = secretProps["twitter_consumer_key"]
+    val consumerSecret = secretProps["twitter_consumer_secret"]
+
+    inputs.property("consumerKey", consumerKey)
+    inputs.property("consumerSecret", consumerSecret)
+    outputs.dir(outputDir)
+
+    doLast {
+        val configFile = file("$outputDir/com/codingfeline/twitter4kt/TestConfig.kt")
+        configFile.parentFile.mkdirs()
+        configFile.writeText(
+            """// Generated file. Do not edit!
+            |package com.codingfeline.twitter4kt
+            |
+            |val TEST_CONSUMER_KEY = "$consumerKey"
+            |val TEST_CONSUMER_SECRET = "$consumerSecret"
+        """.trimMargin()
+        )
+    }
+}
+
+// TODO depends on test tasks
+tasks.getByName("compileKotlinJvm").dependsOn("createTestConfig")
