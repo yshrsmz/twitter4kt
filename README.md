@@ -38,3 +38,15 @@ val accessTokens = AccessToken(
     secret=""
 )
 ```
+
+
+## Development
+
+Create `./secrets.properties`
+
+```properties
+twitter_consumer_key=YOUR_CONSUMER_KEY
+twitter_consumer_secret=YOUR_CONSUMER_SECRET
+```
+
+These keys are used in test cases.
