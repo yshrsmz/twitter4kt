@@ -56,3 +56,4 @@ playground.xcworkspace
 secret.properties
 !.idea/codeStyles/*
 !.idea/dictionaries/dic.xml
+!.idea/saveactions_settings.xml
