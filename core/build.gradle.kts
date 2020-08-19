@@ -88,6 +88,7 @@ kotlin {
     }
 }
 
+// TODO: make it a gradle plugin
 tasks.create("createTestConfig") {
     val secretsFile = rootDir.resolve("secrets.properties")
     val secretProps = Properties()
