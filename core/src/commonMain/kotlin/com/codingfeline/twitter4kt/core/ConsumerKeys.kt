@@ -1,6 +1,6 @@
 package com.codingfeline.twitter4kt.core
 
 data class ConsumerKeys(
-    val apiKey: String,
-    val apiKeySecret: String
+    val key: String,
+    val secret: String
 )
