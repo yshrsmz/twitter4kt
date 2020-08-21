@@ -3,9 +3,10 @@ package com.codingfeline.twitter4kt.core.oauth1a
 import com.codingfeline.twitter4kt.TEST_CONSUMER_KEY
 import com.codingfeline.twitter4kt.TEST_CONSUMER_SECRET
 import com.codingfeline.twitter4kt.core.ConsumerKeys
-import io.ktor.client.features.ClientRequestException
-import io.ktor.utils.io.readUTF8Line
+import io.ktor.client.features.*
+import io.ktor.utils.io.*
 import kotlinx.coroutines.runBlocking
+import org.junit.Ignore
 import org.junit.Test
 
 class OAuth1aFlowTest {
@@ -15,9 +16,10 @@ class OAuth1aFlowTest {
         secret = TEST_CONSUMER_SECRET,
     )
 
+    @Ignore
     @Test
     fun test() = runBlocking {
-        val flow = OAuth1aFlow(consumerKeys, OAuthConfig(callback = "twittersdk://"))
+        val flow = OAuth1aFlow(consumerKeys, OAuthConfig(callback = "oob"))
 
         try {
             val requestToken = flow.fetchRequestToken()

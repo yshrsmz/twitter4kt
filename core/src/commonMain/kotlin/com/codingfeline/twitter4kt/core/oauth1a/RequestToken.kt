@@ -1,14 +1,16 @@
 package com.codingfeline.twitter4kt.core.oauth1a
 
-import io.ktor.http.Url
-import io.ktor.http.parametersOf
+import com.codingfeline.twitter4kt.core.apiUrl
 
 
 data class RequestToken(
     val token: String,
-    val tokenSecret: String
+    val secret: String,
+    val callbackConfirmed: Boolean
 ) {
-    val authorizationUrl: String = Url("https://api.twitter.com/oauth/request_token")
-        .copy(parameters = parametersOf("oauth_token" to listOf(token)))
-        .toString()
+    val authorizationUrl: String = apiUrl("oauth/request_token")
+        .also {
+            it.parameters["oauth_token"] = token
+        }
+        .buildString()
 }

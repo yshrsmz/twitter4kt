@@ -1,16 +1,12 @@
 package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.ConsumerKeys
-import com.codingfeline.twitter4kt.core.Urls
-import io.ktor.client.HttpClient
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
-import io.ktor.client.features.logging.SIMPLE
-import io.ktor.client.request.forms.FormDataContent
-import io.ktor.client.request.post
-import io.ktor.http.Parameters
-import io.ktor.http.URLBuilder
+import com.codingfeline.twitter4kt.core.apiUrl
+import io.ktor.client.*
+import io.ktor.client.features.logging.*
+import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
+import io.ktor.http.*
 import kotlinx.datetime.Clock
 
 class OAuth1aFlow(
@@ -18,7 +14,6 @@ class OAuth1aFlow(
     private val oAuthConfig: OAuthConfig = OAuthConfig()
 ) {
     private val httpClient = HttpClient {
-        // TODO: install request signer
         install(OAuthFlowHeaders.Feature) {
             this.consumerKeys = this@OAuth1aFlow.consumerKeys
             this.oAuthConfig = this@OAuth1aFlow.oAuthConfig
@@ -32,22 +27,27 @@ class OAuth1aFlow(
     }
 
     suspend fun fetchRequestToken(): RequestToken {
-        val url = URLBuilder(Urls.API_ENDPOINT)
-            .path("oauth/request_token")
-            .run {
-//                parameters.apply {
-//                    append("oauth_callback", oAuthConfig.callback)
-//                }
-                build()
-            }
-
-        val result = httpClient.post<String>(url = url) {
-//            body = FormDataContent(parametersOf("oauth_callback" to listOf(oAuthConfig.callback)))
+        val url = apiUrl("oauth/request_token").build()
+        val res = httpClient.post<String>(url = url) {
             body = FormDataContent(Parameters.Empty)
         }
 
-        println("oauth/request_token: $result")
+        val results = res.split("&")
+            .map { params ->
+                params.split("=", limit = 2)
+                    .let { it.first() to it.last() }
+            }
+            .toMap()
 
-        return RequestToken("", "")
+        val token = requireNotNull(results["oauth_token"]) { "oauth_token is missing" }
+        val secret = requireNotNull(results["oauth_token_secret"]) { "oauth_token_secret is missing" }
+        val callbackConfirmed =
+            requireNotNull(results["oauth_callback_confirmed"]) { "oauth_callback_confirmed is missing" }.toBoolean()
+
+        return RequestToken(
+            token,
+            secret,
+            callbackConfirmed
+        )
     }
 }
