@@ -51,14 +51,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
-                implementation("io.ktor:ktor-client-core:1.4.0")
-                implementation("io.ktor:ktor-client-json:1.4.0")
-                implementation("io.ktor:ktor-client-serialization:1.4.0")
-                implementation("io.ktor:ktor-client-logging:1.4.0")
-
-                api(project(":model"))
             }
 
         }
@@ -67,8 +59,6 @@ kotlin {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
-            val genDir = file("${project.buildDir}/testconfig")
-            this.kotlin.srcDirs(genDir)
         }
         val jvmMain by getting {
             dependencies {
@@ -92,34 +82,3 @@ kotlin {
          */
     }
 }
-
-// TODO: make it a gradle plugin
-tasks.create("createTestConfig") {
-    val secretsFile = rootDir.resolve("secrets.properties")
-    val secretProps = Properties()
-    secretProps.load(secretsFile.inputStream())
-
-    val outputDir = file("${project.buildDir}/testconfig")
-    val consumerKey = secretProps["twitter_consumer_key"]
-    val consumerSecret = secretProps["twitter_consumer_secret"]
-
-    inputs.property("consumerKey", consumerKey)
-    inputs.property("consumerSecret", consumerSecret)
-    outputs.dir(outputDir)
-
-    doLast {
-        val configFile = file("$outputDir/com/codingfeline/twitter4kt/TestConfig.kt")
-        configFile.parentFile.mkdirs()
-        configFile.writeText(
-            """// Generated file. Do not edit!
-            |package com.codingfeline.twitter4kt
-            |
-            |val TEST_CONSUMER_KEY = "$consumerKey"
-            |val TEST_CONSUMER_SECRET = "$consumerSecret"
-        """.trimMargin()
-        )
-    }
-}
-
-// TODO depends on test tasks
-tasks.getByName("compileKotlinJvm").dependsOn("createTestConfig")

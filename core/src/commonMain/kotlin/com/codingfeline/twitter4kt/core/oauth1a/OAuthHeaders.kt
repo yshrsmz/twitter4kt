@@ -2,12 +2,17 @@ package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.getNonce
-import io.ktor.client.*
-import io.ktor.client.features.*
-import io.ktor.client.request.*
-import io.ktor.http.*
-import io.ktor.http.auth.*
-import io.ktor.util.*
+import com.codingfeline.twitter4kt.model.oauth1a.AccessToken
+import io.ktor.client.HttpClient
+import io.ktor.client.features.HttpClientFeature
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.HttpRequestPipeline
+import io.ktor.client.request.headers
+import io.ktor.http.HttpHeaders
+import io.ktor.http.auth.AuthScheme
+import io.ktor.http.auth.HeaderValueEncoding
+import io.ktor.http.auth.HttpAuthHeader
+import io.ktor.util.AttributeKey
 import kotlinx.datetime.Clock
 import kotlin.collections.set
 

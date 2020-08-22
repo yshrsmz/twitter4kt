@@ -1,16 +1,14 @@
 package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.apiUrl
+import com.codingfeline.twitter4kt.model.oauth1a.RequestToken
 
-
-data class RequestToken(
-    val token: String,
-    val secret: String,
-    val callbackConfirmed: Boolean
-) {
-    val authorizationUrl: String = apiUrl("oauth/request_token")
-        .also {
-            it.parameters["oauth_token"] = token
-        }
+val RequestToken.authorizationUrl: String
+    get() = apiUrl("oauth/authorize")
+        .also { it.parameters["oauth_token"] = token }
         .buildString()
-}
+
+val RequestToken.authenticationUrl: String
+    get() = apiUrl("oauth/authenticate")
+        .also { it.parameters["oauth_token"] = token }
+        .buildString()

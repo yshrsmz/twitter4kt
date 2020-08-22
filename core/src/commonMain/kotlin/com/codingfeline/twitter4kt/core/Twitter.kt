@@ -1,6 +1,7 @@
 package com.codingfeline.twitter4kt.core
 
 import com.codingfeline.twitter4kt.core.oauth1a.OAuth1aFlow
+import com.codingfeline.twitter4kt.core.oauth1a.OAuthConfig
 import com.codingfeline.twitter4kt.core.session.ApiClient
 
 fun Twitter(block: TwitterConfig.Builder.() -> Unit): Twitter {
@@ -15,8 +16,8 @@ class Twitter(
 }
 
 
-fun Twitter.launchOAuth1aFlow(): OAuth1aFlow {
-    return OAuth1aFlow(config.consumerKeys)
+fun Twitter.launchOAuth1aFlow(oAuthConfig: OAuthConfig = OAuthConfig()): OAuth1aFlow {
+    return OAuth1aFlow(config.consumerKeys, oAuthConfig, config.httpClientConfig)
 }
 
 fun Twitter.startSession(): ApiClient {

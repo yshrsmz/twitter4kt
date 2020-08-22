@@ -16,3 +16,4 @@ rootProject.name = "twitter4kt"
 
 
 include("core")
+include("model")

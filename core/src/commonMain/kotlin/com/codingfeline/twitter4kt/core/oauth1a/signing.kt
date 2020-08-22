@@ -1,8 +1,12 @@
 package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.ConsumerKeys
-import io.ktor.client.request.forms.*
-import io.ktor.http.*
+import com.codingfeline.twitter4kt.model.oauth1a.AccessToken
+import io.ktor.client.request.forms.FormDataContent
+import io.ktor.http.HttpMethod
+import io.ktor.http.Url
+import io.ktor.http.encodeOAuth
+import io.ktor.http.parametersOf
 
 internal fun createSignature(
     method: HttpMethod,

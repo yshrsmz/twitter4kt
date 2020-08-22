@@ -1,4 +1,4 @@
-package com.codingfeline.twitter4kt.core.oauth1a
+package com.codingfeline.twitter4kt.model.oauth1a
 
 data class AccessToken(
     val token: String,
