@@ -76,6 +76,6 @@ class OAuth1aFlow(
         val secret = requireNotNull(results["oauth_token_secret"]) { "oauth_token_secret is missing" }
         val userId = requireNotNull(results["user_id"]) { "user_id is missing" }
         val screenName = requireNotNull(results["screen_name"]) { "screen_name is missing" }
-        return AccessToken(token, secret)
+        return AccessToken(token, secret, userId, screenName)
     }
 }
