@@ -66,6 +66,17 @@ class OAuth1aFlow(
         )
     }
 
+    /**
+     * Allows a Consumer application to exchange the OAuth Request Token for an OAuth Access Token.
+     * This method fulfills [Section 6.3](http://oauth.net/core/1.0/#auth_step3) of the [OAuth 1.0 authentication flow](http://oauth.net/core/1.0/#anchor9).
+     *
+     * [Twitter API reference](https://developer.twitter.com/en/docs/authentication/api-reference/access_token)
+     *
+     * @param oAuthToken The oauth_token here must be the same as the oauth_token returned in the request_token step.
+     * @param oAuthVerifier If using the OAuth web-flow, set this parameter to the value of the oauth_verifier returned in the callback URL.
+     * If you are using out-of-band OAuth, set this value to the pin-code. For OAuth 1.0a compliance this parameter is required.
+     * OAuth 1.0a is strictly enforced and applications not using the oauth_verifier will fail to complete the OAuth flow.
+     */
     suspend fun fetchAccessToken(oAuthToken: String, oAuthVerifier: String): AccessToken {
         val url = apiUrl("oauth/access_token").build()
 
