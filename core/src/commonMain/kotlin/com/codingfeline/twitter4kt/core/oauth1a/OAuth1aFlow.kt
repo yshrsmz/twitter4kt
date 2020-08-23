@@ -40,6 +40,12 @@ class OAuth1aFlow(
         }
     }
 
+    /**
+     * Allows a Consumer application to obtain an OAuth Request Token to request user authorization.
+     * This method fulfills [Section 6.1](https://oauth.net/core/1.0/#auth_step1) of the [OAuth 1.0 authentication flow](http://oauth.net/core/1.0/#anchor9).
+     *
+     * [Twitter API reference](https://developer.twitter.com/en/docs/authentication/api-reference/request_token)
+     */
     suspend fun fetchRequestToken(): RequestToken {
         val url = apiUrl("oauth/request_token").build()
         val res = httpClient.post<String>(url = url) {
