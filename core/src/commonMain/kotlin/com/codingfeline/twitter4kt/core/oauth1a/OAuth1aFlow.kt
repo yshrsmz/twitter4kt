@@ -22,20 +22,22 @@ class OAuth1aFlow(
     private val oAuthConfig: OAuthConfig,
     private val httpClientConfig: HttpClientConfig<*>.() -> Unit = {}
 ) {
-    private val httpClient = HttpClient {
-        install(OAuthFlowHeaders.Feature) {
-            this.consumerKeys = this@OAuth1aFlow.consumerKeys
-            this.oAuthConfig = this@OAuth1aFlow.oAuthConfig
-            this.clock = Clock.System
-        }
+    private val httpClient by lazy {
+        HttpClient {
+            install(OAuthFlowHeaders.Feature) {
+                this.consumerKeys = this@OAuth1aFlow.consumerKeys
+                this.oAuthConfig = this@OAuth1aFlow.oAuthConfig
+                this.clock = Clock.System
+            }
 
-        // TODO: move this to httpClientConfig
-        install(Logging) {
-            logger = Logger.SIMPLE
-            level = LogLevel.ALL
-        }
+            // TODO: move this to httpClientConfig
+            install(Logging) {
+                logger = Logger.SIMPLE
+                level = LogLevel.ALL
+            }
 
-        this.apply(httpClientConfig)
+            this.apply(httpClientConfig)
+        }
     }
 
     suspend fun fetchRequestToken(): RequestToken {
