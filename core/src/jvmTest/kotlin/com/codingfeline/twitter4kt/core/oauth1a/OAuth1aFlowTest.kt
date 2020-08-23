@@ -24,7 +24,7 @@ class OAuth1aFlowTest {
         try {
             val requestToken = flow.fetchRequestToken()
             println(requestToken)
-            println(requestToken.authorizationUrl)
+            println(requestToken.authorizationUrl())
         } catch (e: ClientRequestException) {
             val body = e.response?.content?.readUTF8Line() ?: ""
             println(e)
