@@ -24,4 +24,6 @@ class ApiClient(
             this.apply(httpClientConfig)
         }
     }
+
+    companion object
 }
