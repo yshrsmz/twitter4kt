@@ -1,6 +1,6 @@
 package com.codingfeline.twitter4kt.core
 
-import io.ktor.http.*
+import io.ktor.http.URLBuilder
 
 object Urls {
     const val API_ENDPOINT = "https://api.twitter.com"

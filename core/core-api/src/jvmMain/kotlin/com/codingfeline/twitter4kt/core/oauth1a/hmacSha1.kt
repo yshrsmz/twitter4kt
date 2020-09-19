@@ -1,7 +1,8 @@
 package com.codingfeline.twitter4kt.core.oauth1a
 
-import io.ktor.http.*
-import io.ktor.util.*
+import io.ktor.http.encodeOAuth
+import io.ktor.util.InternalAPI
+import io.ktor.util.encodeBase64
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
