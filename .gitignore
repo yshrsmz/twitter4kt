@@ -54,6 +54,6 @@ playground.xcworkspace
 .DS_Store
 
 secrets.properties
-!.idea/codeStyles/*
+!.idea/codeStyles/
 !.idea/dictionaries/dic.xml
 !.idea/saveactions_settings.xml
