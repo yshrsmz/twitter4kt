@@ -1,5 +1,7 @@
 plugins {
-    id("com.github.ben-manes.versions").version("0.29.0")
+    id("com.github.ben-manes.versions").version("0.33.0")
+    kotlin("multiplatform") version "1.4.10" apply false
+    kotlin("plugin.serialization") version "1.4.10" apply false
 }
 
 val GROUP: String by project
