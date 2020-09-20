@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Entities(
     @SerialName("hashtags") val hashtags: List<HashtagEntity>,
-    @SerialName("media") val media: List<MediaEntity>,
+    @SerialName("media") val media: List<MediaEntity> = emptyList(),
     @SerialName("urls") val urls: List<URLEntity>,
     @SerialName("user_mentions") val userMentions: List<UserMentionEntity>,
     @SerialName("symbols") val symbols: List<SymbolEntity>,

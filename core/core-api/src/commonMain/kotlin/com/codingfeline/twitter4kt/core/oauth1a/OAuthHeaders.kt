@@ -83,7 +83,7 @@ class OAuthRequestHeaders(
         }
 
         override fun prepare(block: Configuration.() -> Unit): OAuthRequestHeaders {
-            TODO("Not yet implemented")
+            return Configuration().apply(block).build()
         }
 
     }

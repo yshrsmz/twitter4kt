@@ -51,6 +51,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
 
+                api(project(":core:core-api"))
                 api(project(":v1:v1-model"))
             }
 

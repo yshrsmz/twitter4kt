@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ExtendedEntities(
-    @SerialName("media") val media: List<Entities.MediaEntity>
+    @SerialName("media") val media: List<Entities.MediaEntity> = emptyList()
 )

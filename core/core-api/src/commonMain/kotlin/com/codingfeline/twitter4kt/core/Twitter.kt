@@ -5,6 +5,7 @@ import com.codingfeline.twitter4kt.core.oauth1a.OAuth1aFlow
 import com.codingfeline.twitter4kt.core.oauth1a.OAuthConfig
 import com.codingfeline.twitter4kt.core.session.ApiClient
 
+@Suppress("FunctionName")
 fun Twitter(block: TwitterConfig.Builder.() -> Unit): Twitter {
     return Twitter(config = TwitterConfig.Builder().apply(block).build())
 }
