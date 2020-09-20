@@ -1,5 +1,6 @@
 plugins {
     id("com.github.ben-manes.versions").version("0.33.0")
+    id("build-helper")
     kotlin("multiplatform") version "1.4.10" apply false
     kotlin("plugin.serialization") version "1.4.10" apply false
 }

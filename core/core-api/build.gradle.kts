@@ -1,5 +1,3 @@
-import java.util.*
-
 plugins {
     kotlin("multiplatform")
 }
@@ -85,34 +83,3 @@ kotlin {
          */
     }
 }
-
-// TODO: make it a gradle plugin
-tasks.create("createTestConfig") {
-    val secretsFile = rootDir.resolve("secrets.properties")
-    val secretProps = Properties()
-    secretProps.load(secretsFile.inputStream())
-
-    val outputDir = file("${project.buildDir}/testconfig")
-    val consumerKey = secretProps["twitter_consumer_key"]
-    val consumerSecret = secretProps["twitter_consumer_secret"]
-
-    inputs.property("consumerKey", consumerKey)
-    inputs.property("consumerSecret", consumerSecret)
-    outputs.dir(outputDir)
-
-    doLast {
-        val configFile = file("$outputDir/com/codingfeline/twitter4kt/TestConfig.kt")
-        configFile.parentFile.mkdirs()
-        configFile.writeText(
-            """// Generated file. Do not edit!
-            |package com.codingfeline.twitter4kt
-            |
-            |val TEST_CONSUMER_KEY = "$consumerKey"
-            |val TEST_CONSUMER_SECRET = "$consumerSecret"
-        """.trimMargin()
-        )
-    }
-}
-
-// TODO depends on test tasks
-tasks.getByName("compileKotlinJvm").dependsOn("createTestConfig")
