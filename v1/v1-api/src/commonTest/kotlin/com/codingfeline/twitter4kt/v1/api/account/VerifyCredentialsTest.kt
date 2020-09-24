@@ -10,6 +10,7 @@ import com.codingfeline.twitter4kt.core.Twitter
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.startSession
 import com.codingfeline.twitter4kt.v1.api.runTest
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 class VerifyCredentialsTest {
@@ -26,6 +27,7 @@ class VerifyCredentialsTest {
         screenName = TEST_USER_ID
     )
 
+    @Ignore
     @Test
     fun test() = runTest {
         val twitter = Twitter {
