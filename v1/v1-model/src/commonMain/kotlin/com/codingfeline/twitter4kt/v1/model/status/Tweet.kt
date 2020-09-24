@@ -34,7 +34,7 @@ data class Tweet(
     @SerialName("extended_entities") val extendedEntities: ExtendedEntities? = null,
     @SerialName("favorited") val favorited: Boolean,
     @SerialName("retweeted") val retweeted: Boolean,
-    @SerialName("possibly_sensitive") val possiblySensitive: Boolean,
+    @SerialName("possibly_sensitive") val possiblySensitive: Boolean? = null,
     @SerialName("filter_level") val filterLevel: String? = null,
     @SerialName("lang") val lang: String? = null,
     @SerialName("geo") @Deprecated(

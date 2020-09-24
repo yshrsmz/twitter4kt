@@ -16,7 +16,7 @@ data class User(
     @SerialName("location") val location: String?,
     // TODO: derived field
     @SerialName("url") val url: String?,
-    @SerialName("description") val description: String?,
+    @SerialName("description") val description: String? = null,
     @SerialName("protected") val protected: Boolean,
     @SerialName("verified") val verified: Boolean,
     @SerialName("followers_count") val followersCount: Int,
@@ -29,7 +29,7 @@ data class User(
     @SerialName("profile_image_url_https") val profileImageUrlHttps: String,
     @SerialName("default_profile") val defaultProfile: Boolean,
     @SerialName("default_profile_image") val defaultProfileImage: Boolean,
-    @SerialName("withheld_in_countries") val withheldInCountries: List<String>?,
-    @SerialName("withheld_scope") val withheldScope: String?,
-    @SerialName("status") val status: Tweet?,
+    @SerialName("withheld_in_countries") val withheldInCountries: List<String>? = null,
+    @SerialName("withheld_scope") val withheldScope: String? = null,
+    @SerialName("status") val status: Tweet? = null,
 )
