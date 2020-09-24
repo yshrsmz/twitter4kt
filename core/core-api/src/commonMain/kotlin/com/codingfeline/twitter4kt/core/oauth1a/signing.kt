@@ -6,6 +6,7 @@ import io.ktor.client.request.forms.FormDataContent
 import io.ktor.http.HttpMethod
 import io.ktor.http.Url
 import io.ktor.http.encodeOAuth
+import io.ktor.http.encodeURLParameter
 import io.ktor.http.parametersOf
 
 internal fun createSignature(
@@ -25,7 +26,7 @@ internal fun createSignature(
     if (requestBody is FormDataContent) {
         requestBody.formData.forEach { key, values ->
             val current = oauthParameters.getOrElse(key) { setOf() }
-            oauthParameters[key] = current + values.toSet()
+            oauthParameters[key] = current + values.map { it.encodeURLParameter() }.toSet()
         }
     }
 
