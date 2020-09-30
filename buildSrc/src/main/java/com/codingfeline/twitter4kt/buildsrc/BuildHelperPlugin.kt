@@ -8,6 +8,7 @@ import java.io.File
 import java.util.*
 
 class BuildHelperPlugin : Plugin<Project> {
+
     override fun apply(target: Project) {
         target.subprojects {
             if (path.endsWith("-api")) {

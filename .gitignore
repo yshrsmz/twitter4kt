@@ -53,6 +53,8 @@ playground.xcworkspace
 #Because ugh
 .DS_Store
 
+*.hprof
+
 secrets.properties
 !.idea/codeStyles/
 !.idea/dictionaries/dic.xml
