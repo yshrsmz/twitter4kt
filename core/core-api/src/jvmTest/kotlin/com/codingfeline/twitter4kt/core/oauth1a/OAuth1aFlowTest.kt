@@ -26,7 +26,7 @@ class OAuth1aFlowTest {
             println(requestToken)
             println(requestToken.authorizationUrl())
         } catch (e: ClientRequestException) {
-            val body = e.response?.content?.readUTF8Line() ?: ""
+            val body = e.response.content.readUTF8Line() ?: ""
             println(e)
             println(body)
         }
@@ -41,7 +41,7 @@ class OAuth1aFlowTest {
             val accessToken = flow.fetchAccessToken("ENTER_YOUR_OAUTH_TOKEN", "ENTER_YOUR_OAUTH_VERIFIER")
             println(accessToken)
         } catch (e: ClientRequestException) {
-            val body = e.response?.content?.readUTF8Line() ?: ""
+            val body = e.response.content.readUTF8Line() ?: ""
             println(e)
             println(body)
         }

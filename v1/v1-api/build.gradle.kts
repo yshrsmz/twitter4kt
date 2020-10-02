@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform")
+    id(Plugins.multiplatform)
 }
 
 kotlin {
@@ -35,41 +35,37 @@ kotlin {
     */
 
     sourceSets {
-        val ktorVersion = "1.4.0"
-        all {
-            languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
-        }
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-json:$ktorVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
-                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+                implementation(Deps.Kotlin.serialization)
+                implementation(Deps.Kotlin.coroutines)
+                implementation(Deps.Kotlin.datetime)
+                implementation(Deps.Ktor.core)
+                implementation(Deps.Ktor.json)
+                implementation(Deps.Ktor.serialization)
+                implementation(Deps.Ktor.logging)
 
-                api(project(":core:core-api"))
-                api(project(":v1:v1-model"))
+                api(project(Deps.Twitter4kt.coreApi))
+                api(project(Deps.Twitter4kt.v1Model))
             }
 
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(kotlin(Deps.Kotlin.Test.common))
+                implementation(kotlin(Deps.Kotlin.Test.annotations))
             }
-            val genDir = file("${project.buildDir}/testconfig")
-            this.kotlin.srcDirs(genDir)
+//            val genDir = file("${project.buildDir}/testconfig")
+//            this.kotlin.srcDirs(genDir)
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation(Deps.Ktor.okhttp)
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
+                implementation(kotlin(Deps.Kotlin.Test.junit))
             }
         }
         /*

@@ -64,7 +64,7 @@ fun TwitterError.Companion.fromJsonObject(json: Json, jsonObject: JsonObject): L
 }
 
 suspend fun ClientRequestException.asTwitterApiException(json: Json): TwitterApiException? {
-    val resText = response?.content?.readUTF8Line() ?: return null
+    val resText = response.content.readUTF8Line() ?: return null
     val jsonRes = json.decodeFromString<JsonObject>(resText)
     if (jsonRes.containsKey("errors")) {
         val errors = TwitterError.fromJsonObject(json, jsonRes)

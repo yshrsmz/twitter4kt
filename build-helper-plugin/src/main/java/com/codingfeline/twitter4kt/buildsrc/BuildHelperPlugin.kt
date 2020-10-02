@@ -4,19 +4,41 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskProvider
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import java.io.File
 import java.util.*
 
+const val TESTCONFIG_DIR = "testconfig"
+
+@Suppress("unused")
 class BuildHelperPlugin : Plugin<Project> {
+
+    private val ignoreModules = listOf(":core", ":v1")
 
     override fun apply(target: Project) {
         target.subprojects {
-            if (path.endsWith("-api")) {
-                afterEvaluate {
-                    val task = createTestConfigTask()
-                    // TODO depends on test tasks
-                    tasks.findByName("compileKotlinJvm")?.dependsOn(task)
+            if (ignoreModules.contains(it.path)) return@subprojects
+
+            it.configureKotlin()
+            it.configureApiModules()
+        }
+    }
+
+    private fun Project.configureKotlin() {
+        afterEvaluate {
+            kotlinMultiplatformExtension.apply {
+                sourceSets.all { sourceSet ->
+                    sourceSet.languageSettings
+                        .useExperimentalAnnotation("kotlin.RequiresOptIn")
                 }
+            }
+        }
+    }
+
+    private fun Project.configureApiModules() {
+        if (path.endsWith("-api")) {
+            afterEvaluate {
+                it.setupTestConfig()
             }
         }
     }
@@ -31,10 +53,19 @@ class BuildHelperPlugin : Plugin<Project> {
         return props
     }
 
+    private fun Project.setupTestConfig() {
+        val task = createTestConfigTask()
+        // TODO depends on test tasks
+        tasks.findByName("compileTestKotlinJvm")?.dependsOn(task)
+
+        kotlinMultiplatformExtension.sourceSets.getByName("commonTest")
+            .kotlin.srcDir("${buildDir}/$TESTCONFIG_DIR")
+    }
+
     private fun Project.createTestConfigTask(): TaskProvider<Task> {
         val task = tasks.register("createTestConfig") {
             val secrets = getSecrets()
-            val outputDir = File("${buildDir}/testconfig")
+            val outputDir = File("${buildDir}/$TESTCONFIG_DIR")
             val consumerKey = secrets["twitter_consumer_key"]
             val consumerSecret = secrets["twitter_consumer_secret"]
             val accessToken = secrets["twitter_access_token"]
@@ -42,17 +73,19 @@ class BuildHelperPlugin : Plugin<Project> {
             val userId = secrets["twitter_user_id"]
             val screenName = secrets["twitter_screen_name"]
 
-            inputs.property("consumerKey", consumerKey)
-            inputs.property("consumerSecret", consumerSecret)
-            inputs.property("accessToken", accessToken)
-            inputs.property("accessTokenSecret", accessTokenSecret)
-            inputs.property("userId", userId)
-            inputs.property("screenName", screenName)
-            outputs.dir(outputDir)
+            it.inputs.property("consumerKey", consumerKey)
+            it.inputs.property("consumerSecret", consumerSecret)
+            it.inputs.property("accessToken", accessToken)
+            it.inputs.property("accessTokenSecret", accessTokenSecret)
+            it.inputs.property("userId", userId)
+            it.inputs.property("screenName", screenName)
+            it.outputs.dir(outputDir)
             group = "twitter4kt"
 
-            doLast {
+            it.doLast {
                 val configFile = file("$outputDir/com/codingfeline/twitter4kt/TestConfig.kt")
+                if (configFile.exists()) configFile.delete()
+
                 configFile.parentFile.mkdirs()
                 configFile.writeText(
                     """// Generated file. Do not edit!
@@ -70,4 +103,7 @@ class BuildHelperPlugin : Plugin<Project> {
         }
         return task
     }
+
+    private val Project.kotlinMultiplatformExtension: KotlinMultiplatformExtension
+        get() = requireNotNull(extensions.getByType(KotlinMultiplatformExtension::class.java))
 }

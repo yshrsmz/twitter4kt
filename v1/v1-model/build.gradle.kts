@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
+    id(Plugins.multiplatform)
+    id(Plugins.serialization)
 }
 
 kotlin {
@@ -36,13 +36,9 @@ kotlin {
     */
 
     sourceSets {
-        val ktorVersion = "1.4.0"
-        all {
-            languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
-        }
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC2")
             }
         }
         val commonTest by getting {

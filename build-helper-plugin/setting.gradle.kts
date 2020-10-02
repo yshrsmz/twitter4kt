@@ -8,13 +8,3 @@ pluginManagement {
         maven("https://dl.bintray.com/kotlin/kotlin-eap")
     }
 }
-rootProject.name = "twitter4kt"
-
-includeBuild("build-helper-plugin")
-
-include(
-    ":core:core-model",
-    ":core:core-api",
-    ":v1:v1-api",
-    ":v1:v1-model"
-)

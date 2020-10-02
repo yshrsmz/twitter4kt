@@ -1,10 +1,10 @@
 plugins {
-    id("com.github.ben-manes.versions").version("0.33.0")
-    id("build-helper")
-    id("com.vanniktech.maven.publish") version "0.13.0" apply false
-    id("org.jetbrains.dokka") version "1.4.10" apply false
-    kotlin("multiplatform") version "1.4.10" apply false
-    kotlin("plugin.serialization") version "1.4.10" apply false
+    id(Plugins.buildHelper)
+    id(Plugins.versions) version Versions.versions
+    id(Plugins.mavenPublish) version Versions.mavenPublish apply false
+    id(Plugins.dokka) version Versions.kotlin apply false
+    id(Plugins.multiplatform) version Versions.kotlin apply false
+    id(Plugins.serialization) version Versions.kotlin apply false
 }
 
 val GROUP: String by project
@@ -16,15 +16,15 @@ allprojects {
         mavenCentral()
         jcenter()
         maven { url = uri("https://dl.bintray.com/kotlin/kotlinx") }
-        maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
+//        maven { url = uri("https://dl.bintray.com/kotlin/kotlin-eap") }
     }
 }
 
 val emptyProjects = listOf(":core", ":v1")
 subprojects {
     if (!emptyProjects.contains(path)) {
-        apply(plugin = "org.jetbrains.dokka")
-        apply(plugin = "com.vanniktech.maven.publish")
+        apply(plugin = Plugins.dokka)
+        apply(plugin = Plugins.mavenPublish)
 
         tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
 
@@ -33,6 +33,6 @@ subprojects {
 }
 
 tasks.wrapper {
-    gradleVersion = "6.6.1"
+    gradleVersion = Versions.gradle
     distributionType = Wrapper.DistributionType.ALL
 }

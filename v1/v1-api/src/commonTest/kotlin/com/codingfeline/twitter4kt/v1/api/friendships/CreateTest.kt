@@ -43,7 +43,7 @@ class CreateTest {
         if (result.isFailure) {
             val error = (result as ApiResult.Failure).error
             if (error is ClientRequestException) {
-                val res = error.response?.content?.readUTF8Line()
+                val res = error.response.content.readUTF8Line()
                 println("res: $res")
             }
         }
