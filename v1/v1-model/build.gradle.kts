@@ -4,11 +4,7 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-    }
+    jvm()
     /*
     js {
         browser {
@@ -38,16 +34,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC2")
+                implementation(Deps.Kotlin.serialization)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(kotlin(Deps.Kotlin.Test.common))
+                implementation(kotlin(Deps.Kotlin.Test.annotations))
             }
-            val genDir = file("${project.buildDir}/testconfig")
-            this.kotlin.srcDirs(genDir)
         }
         val jvmMain by getting {
             dependencies {
@@ -55,7 +49,7 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
+                implementation(kotlin(Deps.Kotlin.Test.junit))
             }
         }
         /*

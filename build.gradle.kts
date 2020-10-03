@@ -20,18 +20,6 @@ allprojects {
     }
 }
 
-val emptyProjects = listOf(":core", ":v1")
-subprojects {
-    if (!emptyProjects.contains(path)) {
-        apply(plugin = Plugins.dokka)
-        apply(plugin = Plugins.mavenPublish)
-
-        tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-
-        }
-    }
-}
-
 tasks.wrapper {
     gradleVersion = Versions.gradle
     distributionType = Wrapper.DistributionType.ALL
