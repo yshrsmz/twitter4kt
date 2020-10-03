@@ -1,7 +1,6 @@
 plugins {
     id(Plugins.buildHelper)
     id(Plugins.versions) version Versions.versions
-    id(Plugins.mavenPublish) version Versions.mavenPublish apply false
     id(Plugins.dokka) version Versions.kotlin apply false
     id(Plugins.multiplatform) version Versions.kotlin apply false
     id(Plugins.serialization) version Versions.kotlin apply false
