@@ -12,6 +12,7 @@ internal fun Project.configureMavenPublications(secrets: Properties) {
         apply(DokkaPlugin::class.java)
     }
     val extension = extensions.getByType(MavenPublishPluginExtension::class.java)
+    extension.releaseSigningEnabled = false
     extension.targets.apply {
         maybeCreate("uploadArchives").apply {
             releaseRepositoryUrl = bintrayReleaseRepositoryUrl
