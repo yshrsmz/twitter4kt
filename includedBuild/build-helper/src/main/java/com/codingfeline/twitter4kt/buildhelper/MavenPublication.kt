@@ -1,4 +1,4 @@
-package com.codingfeline.twitter4kt.buildsrc
+package com.codingfeline.twitter4kt.buildhelper
 
 import com.vanniktech.maven.publish.MavenPublishPlugin
 import com.vanniktech.maven.publish.MavenPublishPluginExtension

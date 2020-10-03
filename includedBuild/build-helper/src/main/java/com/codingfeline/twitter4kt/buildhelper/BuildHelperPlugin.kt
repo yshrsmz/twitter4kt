@@ -1,4 +1,4 @@
-package com.codingfeline.twitter4kt.buildsrc
+package com.codingfeline.twitter4kt.buildhelper
 
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -29,37 +29,37 @@ class BuildHelperPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.subprojects {
-            if (ignoreModules.contains(it.path)) return@subprojects
-            it.afterEvaluate { prj ->
-                prj.configureKotlin()
-                prj.configureApiModules()
-                prj.configureMavenPublications(prj.secrets)
+            if (ignoreModules.contains(path)) return@subprojects
+            afterEvaluate {
+                configureKotlin()
+                configureApiModules()
+                configureMavenPublications(secrets)
             }
         }
     }
 
     private fun Project.configureKotlin() {
         tasks.withType<KotlinCompile>().all {
-            it.sourceCompatibility = "1.8"
-            it.targetCompatibility = "1.8"
-            it.kotlinOptions.jvmTarget = "1.8"
+            sourceCompatibility = "1.8"
+            targetCompatibility = "1.8"
+            kotlinOptions.jvmTarget = "1.8"
         }
         withConvention(JavaPluginConvention::class) {
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8
         }
         kotlinMultiplatformExtension.apply {
-            sourceSets.all { sourceSet ->
-                sourceSet.languageSettings
+            sourceSets.all {
+                languageSettings
                     .useExperimentalAnnotation("kotlin.RequiresOptIn")
             }
-            targets.all { target ->
-                when (target.platformType) {
+            targets.all {
+                when (platformType) {
                     KotlinPlatformType.jvm -> {
-                        (target as KotlinJvmTarget).compilations.all {
-                            it.compileKotlinTask.sourceCompatibility = "1.8"
-                            it.compileKotlinTask.targetCompatibility = "1.8"
-                            it.kotlinOptions.jvmTarget = "1.8"
+                        (this as KotlinJvmTarget).compilations.all {
+                            compileKotlinTask.sourceCompatibility = "1.8"
+                            compileKotlinTask.targetCompatibility = "1.8"
+                            kotlinOptions.jvmTarget = "1.8"
                         }
                     }
                     else -> {
@@ -95,16 +95,16 @@ class BuildHelperPlugin : Plugin<Project> {
             val userId = secrets["twitter_user_id"]
             val screenName = secrets["twitter_screen_name"]
 
-            it.inputs.property("consumerKey", consumerKey)
-            it.inputs.property("consumerSecret", consumerSecret)
-            it.inputs.property("accessToken", accessToken)
-            it.inputs.property("accessTokenSecret", accessTokenSecret)
-            it.inputs.property("userId", userId)
-            it.inputs.property("screenName", screenName)
-            it.outputs.dir(outputDir)
+            inputs.property("consumerKey", consumerKey)
+            inputs.property("consumerSecret", consumerSecret)
+            inputs.property("accessToken", accessToken)
+            inputs.property("accessTokenSecret", accessTokenSecret)
+            inputs.property("userId", userId)
+            inputs.property("screenName", screenName)
+            outputs.dir(outputDir)
             group = "twitter4kt"
 
-            it.doLast {
+            doLast {
                 val configFile = file("$outputDir/com/codingfeline/twitter4kt/TestConfig.kt")
                 if (configFile.exists()) configFile.delete()
 

@@ -10,7 +10,7 @@ pluginManagement {
 }
 rootProject.name = "twitter4kt"
 
-includeBuild("build-helper-plugin")
+includeBuild("includedBuild/build-helper")
 
 include(
     ":core:core-model",
