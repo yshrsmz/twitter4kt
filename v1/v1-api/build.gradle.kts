@@ -3,11 +3,7 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-    }
+    jvm()
     /*
     js {
         browser {
@@ -55,8 +51,6 @@ kotlin {
                 implementation(kotlin(Deps.Kotlin.Test.common))
                 implementation(kotlin(Deps.Kotlin.Test.annotations))
             }
-//            val genDir = file("${project.buildDir}/testconfig")
-//            this.kotlin.srcDirs(genDir)
         }
         val jvmMain by getting {
             dependencies {

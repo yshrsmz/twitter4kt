@@ -1,10 +1,17 @@
 package com.codingfeline.twitter4kt.buildsrc
 
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.plugins.JavaPluginConvention
 import org.gradle.api.tasks.TaskProvider
+import org.gradle.kotlin.dsl.withConvention
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.File
 import java.util.*
 
@@ -15,21 +22,49 @@ class BuildHelperPlugin : Plugin<Project> {
 
     private val ignoreModules = listOf(":core", ":v1")
 
+    private var _secrets: Properties? = null
+
+    private val Project.secrets: Properties
+        get() = _secrets ?: kotlin.run { loadSecrets().also { _secrets = it } }
+
     override fun apply(target: Project) {
         target.subprojects {
             if (ignoreModules.contains(it.path)) return@subprojects
-
-            it.configureKotlin()
-            it.configureApiModules()
+            it.afterEvaluate { prj ->
+                prj.configureKotlin()
+                prj.configureApiModules()
+                prj.configureMavenPublications(prj.secrets)
+            }
         }
     }
 
     private fun Project.configureKotlin() {
-        afterEvaluate {
-            kotlinMultiplatformExtension.apply {
-                sourceSets.all { sourceSet ->
-                    sourceSet.languageSettings
-                        .useExperimentalAnnotation("kotlin.RequiresOptIn")
+        tasks.withType<KotlinCompile>().all {
+            it.sourceCompatibility = "1.8"
+            it.targetCompatibility = "1.8"
+            it.kotlinOptions.jvmTarget = "1.8"
+        }
+        withConvention(JavaPluginConvention::class) {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
+        }
+        kotlinMultiplatformExtension.apply {
+            sourceSets.all { sourceSet ->
+                sourceSet.languageSettings
+                    .useExperimentalAnnotation("kotlin.RequiresOptIn")
+            }
+            targets.all { target ->
+                when (target.platformType) {
+                    KotlinPlatformType.jvm -> {
+                        (target as KotlinJvmTarget).compilations.all {
+                            it.compileKotlinTask.sourceCompatibility = "1.8"
+                            it.compileKotlinTask.targetCompatibility = "1.8"
+                            it.kotlinOptions.jvmTarget = "1.8"
+                        }
+                    }
+                    else -> {
+                        // no-op
+                    }
                 }
             }
         }
@@ -37,20 +72,8 @@ class BuildHelperPlugin : Plugin<Project> {
 
     private fun Project.configureApiModules() {
         if (path.endsWith("-api")) {
-            afterEvaluate {
-                it.setupTestConfig()
-            }
+            setupTestConfig()
         }
-    }
-
-    private fun Project.getSecrets(): Properties {
-        val secretsFile = rootDir.resolve("secrets.properties")
-        if (!secretsFile.exists()) {
-            throw IllegalStateException("secrets.properties does not exist")
-        }
-        val props = Properties()
-        props.load(secretsFile.inputStream())
-        return props
     }
 
     private fun Project.setupTestConfig() {
@@ -64,7 +87,6 @@ class BuildHelperPlugin : Plugin<Project> {
 
     private fun Project.createTestConfigTask(): TaskProvider<Task> {
         val task = tasks.register("createTestConfig") {
-            val secrets = getSecrets()
             val outputDir = File("${buildDir}/$TESTCONFIG_DIR")
             val consumerKey = secrets["twitter_consumer_key"]
             val consumerSecret = secrets["twitter_consumer_secret"]
