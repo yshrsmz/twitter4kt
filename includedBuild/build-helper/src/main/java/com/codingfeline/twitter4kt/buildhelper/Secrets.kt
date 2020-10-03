@@ -1,4 +1,4 @@
-package com.codingfeline.twitter4kt.buildsrc
+package com.codingfeline.twitter4kt.buildhelper
 
 import org.gradle.api.Project
 import java.util.*
