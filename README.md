@@ -12,6 +12,10 @@ Currently, only available for jvm.
 LATEST_VERSION: `0.1.0`
 
 ```kotlin
+plugins {
+  id("org.jetbrains.kotlin.multiplatform") version "1.4.10"
+}
+
 repositories {
     mavenCentral()
     jcenter()
@@ -25,6 +29,9 @@ kotlin {
         val commonMain by getting {
             implementation("com.codingfeline.twitter4kt:core-api:$LATEST_VERSION")
             implementation("com.codingfeline.twitter4kt:v1-api:$LATEST_VERSION")
+
+            // if you need logging for HTTP calls
+            implementatin("io.ktor:ktor-client-logging:$KTOR_VERSION")
         }
     }
 }
@@ -34,17 +41,17 @@ kotlin {
 ## Usage
 
 ```kotlin
-val config = TwitterApiConfig(
-    apiKey="",
-    apiKeySecret=""
-)
-val twitter = Twitter4kt.initialize(config)
-
 val twitter = Twitter {
- consumerKeys = ConsumerKeys(
-  key = "",
-  secret = ""
- )
+    consumerKeys = ConsumerKeys(
+        key = "",
+        secret = ""
+    )
+    httpClientConfig = {
+        install(Logging) {
+            logger = Logger.SIMPLE
+            level = LogLevel.ALL
+        }
+    }
 }
 
 val authFlow = twitter.launchOAuthFlow()
@@ -63,10 +70,7 @@ val accessToken = launch(Dispatchers.io) {
 
 val client = twitter.startSession(accessToken)
 
-val accessTokens = AccessToken(
-    token="",
-    secret=""
-)
+val result: ApiResult<Tweet> = client.statuses.update(status = "Hello from twitter4kt!")
 ```
 
 

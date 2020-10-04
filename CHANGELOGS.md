@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Error handling in oauth1a flow ([#15](https://github.com/yshrsmz/twitter4kt/issues/15))
+- Remove `ktor-client-logging` dependency.
 
 
 ## [0.1.0] - 2020-10-04

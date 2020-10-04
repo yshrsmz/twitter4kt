@@ -39,7 +39,6 @@ kotlin {
                 implementation(Deps.Ktor.core)
                 implementation(Deps.Ktor.json)
                 implementation(Deps.Ktor.serialization)
-                implementation(Deps.Ktor.logging)
 
                 api(project(Deps.Twitter4kt.coreApi))
                 api(project(Deps.Twitter4kt.v1Model))
@@ -50,6 +49,8 @@ kotlin {
             dependencies {
                 implementation(kotlin(Deps.Kotlin.Test.common))
                 implementation(kotlin(Deps.Kotlin.Test.annotations))
+
+                implementation(Deps.Ktor.logging)
             }
         }
         val jvmMain by getting {
