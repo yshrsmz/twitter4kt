@@ -1,9 +1,9 @@
 package com.codingfeline.twitter4kt.v1.api.account
 
 import com.codingfeline.twitter4kt.core.apiUrl
+import com.codingfeline.twitter4kt.core.model.ApiResult
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
 import com.codingfeline.twitter4kt.v1.api.getInternal
-import com.codingfeline.twitter4kt.v1.model.ApiResult
 import com.codingfeline.twitter4kt.v1.model.account.Account
 
 suspend fun AccountApi.verifyCredentials(

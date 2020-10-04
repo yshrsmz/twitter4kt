@@ -1,9 +1,9 @@
 package com.codingfeline.twitter4kt.v1.api.friendships
 
 import com.codingfeline.twitter4kt.core.apiUrl
+import com.codingfeline.twitter4kt.core.model.ApiResult
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
 import com.codingfeline.twitter4kt.v1.api.postInternal
-import com.codingfeline.twitter4kt.v1.model.ApiResult
 import com.codingfeline.twitter4kt.v1.model.user.User
 import io.ktor.http.Parameters
 

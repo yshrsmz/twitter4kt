@@ -1,8 +1,8 @@
 package com.codingfeline.twitter4kt.v1.api
 
+import com.codingfeline.twitter4kt.core.model.ApiResult
 import com.codingfeline.twitter4kt.core.session.ExtendableApiClient
 import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
-import com.codingfeline.twitter4kt.v1.model.ApiResult
 import com.codingfeline.twitter4kt.v1.model.error.TwitterApiException
 import com.codingfeline.twitter4kt.v1.model.error.TwitterError
 import io.ktor.client.features.ClientRequestException
