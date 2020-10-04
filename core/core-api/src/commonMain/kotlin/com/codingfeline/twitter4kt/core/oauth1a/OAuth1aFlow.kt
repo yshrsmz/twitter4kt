@@ -10,10 +10,6 @@ import com.codingfeline.twitter4kt.core.util.appendNotNulls
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.features.ClientRequestException
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
-import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.post
 import io.ktor.http.Parameters
@@ -35,10 +31,7 @@ class OAuth1aFlow(
             }
 
             // TODO: move this to httpClientConfig
-            install(Logging) {
-                logger = Logger.SIMPLE
-                level = LogLevel.ALL
-            }
+
 
             this.apply(httpClientConfig)
         }

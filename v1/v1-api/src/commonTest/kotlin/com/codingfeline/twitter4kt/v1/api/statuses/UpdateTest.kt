@@ -12,6 +12,10 @@ import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.startSession
 import com.codingfeline.twitter4kt.v1.api.runTest
 import io.ktor.client.features.ClientRequestException
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
+import io.ktor.client.features.logging.SIMPLE
 import io.ktor.utils.io.readUTF8Line
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -34,6 +38,12 @@ class UpdateTest {
     fun test() = runTest {
         val twitter = Twitter {
             this.consumerKeys = this@UpdateTest.consumerKeys
+            this.httpClientConfig = {
+                install(Logging) {
+                    logger = Logger.SIMPLE
+                    level = LogLevel.ALL
+                }
+            }
         }
 
         val apiClient = twitter.startSession(accessToken)
