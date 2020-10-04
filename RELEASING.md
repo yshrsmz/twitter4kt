@@ -3,6 +3,7 @@ RELEASING
 
 Needs these environment variables.  
 On a local machine you can use direnv.
+
 ```
 export SONATYPE_NEXUS_USERNAME=$BINTRAY_USERNAME
 export SONATYPE_NEXUS_PASSWORD=$BINTRAY_API_KEY
