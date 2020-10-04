@@ -19,12 +19,14 @@ package com.codingfeline.twitter4kt.buildhelper
 import org.gradle.api.Project
 import java.util.Properties
 
-internal fun Project.loadSecrets(): Properties {
-    val secretsFile = rootDir.resolve("secrets.properties")
-    if (!secretsFile.exists()) {
-        throw IllegalStateException("secrets.properties does not exist")
+private fun Project.loadProperties(path: String): Properties {
+    val propertiesFile = rootDir.resolve(path)
+    if (!propertiesFile.exists()) {
+        throw IllegalStateException("'$path' does not exist")
     }
     val props = Properties()
-    props.load(secretsFile.inputStream())
+    props.load(propertiesFile.inputStream())
     return props
 }
+
+internal fun Project.loadSecrets(): Properties = loadProperties("secrets.properties")

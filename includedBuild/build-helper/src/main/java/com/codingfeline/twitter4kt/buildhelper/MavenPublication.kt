@@ -20,9 +20,8 @@ import com.vanniktech.maven.publish.MavenPublishPlugin
 import com.vanniktech.maven.publish.MavenPublishPluginExtension
 import org.gradle.api.Project
 import org.jetbrains.dokka.gradle.DokkaPlugin
-import java.util.Properties
 
-internal fun Project.configureMavenPublications(secrets: Properties) {
+internal fun Project.configureMavenPublications() {
     pluginManager.apply {
         apply(MavenPublishPlugin::class.java)
         apply(DokkaPlugin::class.java)
@@ -32,12 +31,12 @@ internal fun Project.configureMavenPublications(secrets: Properties) {
     extension.targets.apply {
         maybeCreate("uploadArchives").apply {
             releaseRepositoryUrl = bintrayReleaseRepositoryUrl
-            repositoryUsername = secrets.getProperty("BINTRAY_USER")
-            repositoryPassword = secrets.getProperty("BINTRAY_API_KEY")
         }
         maybeCreate("testMaven").apply {
             releaseRepositoryUrl = file("${rootProject.buildDir}/localMaven").toURI().toString()
             snapshotRepositoryUrl = file("${rootProject.buildDir}/localMaven").toURI().toString()
+            repositoryUsername = null
+            repositoryPassword = null
         }
     }
 }

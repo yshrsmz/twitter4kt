@@ -49,7 +49,7 @@ class BuildHelperPlugin : Plugin<Project> {
             afterEvaluate {
                 configureKotlin()
                 configureApiModules()
-                configureMavenPublications(secrets)
+                configureMavenPublications()
             }
         }
     }

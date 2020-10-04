@@ -85,10 +85,6 @@ twitter_access_token=
 twitter_access_token_secret=
 twitter_user_id=
 twitter_screen_name=
-#
-# below values can be empty(I guess)
-BINTRAY_USER=
-BINTRAY_API_KEY=
 ```
 
 We use these values for testing

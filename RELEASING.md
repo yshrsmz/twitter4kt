@@ -1,6 +1,13 @@
 RELEASING
 ===
 
+Needs these environment variables.  
+On a local machine you can use direnv.
+```
+export SONATYPE_NEXUS_USERNAME=$BINTRAY_USERNAME
+export SONATYPE_NEXUS_PASSWORD=$BINTRAY_API_KEY
+```
+
 1. Change the version in `gradle.properties` to a non-SNAPSHOT version
 2. Update `CHANGELOG.md`
 3. Update `README.md` with the new version
