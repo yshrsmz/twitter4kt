@@ -1,10 +1,26 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.v1.model.status
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Entities(
+public data class Entities(
     @SerialName("hashtags") val hashtags: List<HashtagEntity>,
     @SerialName("media") val media: List<MediaEntity> = emptyList(),
     @SerialName("urls") val urls: List<URLEntity>,
@@ -15,14 +31,13 @@ data class Entities(
     // https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/overview/entities-object#polls
 ) {
     @Serializable
-    data class HashtagEntity(
+    public data class HashtagEntity(
         @SerialName("indices") val indices: List<Int>,
         @SerialName("text") val text: String
     )
 
-
     @Serializable
-    data class MediaEntity(
+    public data class MediaEntity(
         @SerialName("display_url") val displayUrl: String,
         @SerialName("expanded_url") val expandedUrl: String,
         @SerialName("id") val id: Long,
@@ -39,14 +54,14 @@ data class Entities(
         @SerialName("additional_media_info") val additionalMediaInfo: AdditionalMediaInfo?,
     ) {
         @Serializable
-        data class SizeList(
+        public data class SizeList(
             @SerialName("thumb") val thumb: Size,
             @SerialName("large") val large: Size,
             @SerialName("medium") val medium: Size,
             @SerialName("small") val small: Size
         ) {
             @Serializable
-            data class Size(
+            public data class Size(
                 @SerialName("w") val w: Int,
                 @SerialName("h") val h: Int,
                 @SerialName("resize") val resize: String
@@ -54,13 +69,13 @@ data class Entities(
         }
 
         @Serializable
-        data class VideoInfo(
+        public data class VideoInfo(
             @SerialName("aspect_ratio") val aspectRatio: List<Int>,
             @SerialName("duration_millis") val durationMillis: Int,
             @SerialName("variants") val variants: List<Variant>
         ) {
             @Serializable
-            data class Variant(
+            public data class Variant(
                 @SerialName("bitrate") val bitrate: Int?,
                 @SerialName("content_type") val contentType: String,
                 @SerialName("url") val url: String
@@ -68,7 +83,7 @@ data class Entities(
         }
 
         @Serializable
-        data class AdditionalMediaInfo(
+        public data class AdditionalMediaInfo(
             @SerialName("title") val title: String,
             @SerialName("description") val description: String,
             @SerialName("embeddable") val embeddable: Boolean,
@@ -76,9 +91,8 @@ data class Entities(
         )
     }
 
-
     @Serializable
-    data class URLEntity(
+    public data class URLEntity(
         @SerialName("display_url") val displayUrl: String,
         @SerialName("expanded_url") val expandedUrl: String,
         @SerialName("indices") val indices: List<Int>,
@@ -89,7 +103,7 @@ data class Entities(
     )
 
     @Serializable
-    data class UserMentionEntity(
+    public data class UserMentionEntity(
         @SerialName("id") val id: Long,
         @SerialName("id_str") val idStr: String,
         @SerialName("indices") val indices: List<Int>,
@@ -98,7 +112,7 @@ data class Entities(
     )
 
     @Serializable
-    data class SymbolEntity(
+    public data class SymbolEntity(
         @SerialName("indices") val indices: List<Int>,
         @SerialName("text") val text: String
     )

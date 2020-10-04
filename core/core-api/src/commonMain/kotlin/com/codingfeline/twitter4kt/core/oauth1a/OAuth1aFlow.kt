@@ -1,3 +1,19 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.ConsumerKeys
@@ -6,6 +22,7 @@ import com.codingfeline.twitter4kt.core.model.ApiResult
 import com.codingfeline.twitter4kt.core.model.error.TwitterOAuthException
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.model.oauth1a.RequestToken
+import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -17,7 +34,7 @@ import io.ktor.http.parseQueryString
 import io.ktor.utils.io.readUTF8Line
 import kotlinx.datetime.Clock
 
-class OAuth1aFlow(
+public class OAuth1aFlow(
     private val consumerKeys: ConsumerKeys,
     private val oAuthConfig: OAuthConfig,
     private val httpClientConfig: HttpClientConfig<*>.() -> Unit = {}
@@ -32,7 +49,6 @@ class OAuth1aFlow(
 
             // TODO: move this to httpClientConfig
 
-
             this.apply(httpClientConfig)
         }
     }
@@ -43,7 +59,7 @@ class OAuth1aFlow(
      *
      * [Twitter API reference](https://developer.twitter.com/en/docs/authentication/api-reference/request_token)
      */
-    suspend fun fetchRequestToken(): ApiResult<RequestToken> {
+    public suspend fun fetchRequestToken(): ApiResult<RequestToken> {
         val url = apiUrl("oauth/request_token").build()
 
         val result = kotlin.runCatching {
@@ -80,7 +96,8 @@ class OAuth1aFlow(
      * If you are using out-of-band OAuth, set this value to the pin-code. For OAuth 1.0a compliance this parameter is required.
      * OAuth 1.0a is strictly enforced and applications not using the oauth_verifier will fail to complete the OAuth flow.
      */
-    suspend fun fetchAccessToken(oAuthToken: String, oAuthVerifier: String): ApiResult<AccessToken> {
+    @OptIn(Twitter4ktInternalAPI::class)
+    public suspend fun fetchAccessToken(oAuthToken: String, oAuthVerifier: String): ApiResult<AccessToken> {
         val url = apiUrl("oauth/access_token").build()
 
         val result = kotlin.runCatching {

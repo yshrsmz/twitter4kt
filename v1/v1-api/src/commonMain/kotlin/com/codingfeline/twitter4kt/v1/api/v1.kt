@@ -1,3 +1,19 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.v1.api
 
 import com.codingfeline.twitter4kt.core.model.ApiResult
@@ -54,7 +70,7 @@ internal suspend inline fun <reified T> ExtendableApiClient.postInternal(url: Ur
     }
 }
 
-fun TwitterError.Companion.fromJsonObject(json: Json, jsonObject: JsonObject): List<TwitterError> {
+internal fun TwitterError.Companion.fromJsonObject(json: Json, jsonObject: JsonObject): List<TwitterError> {
     val errors = jsonObject.getValue("errors").jsonArray
     return if (errors.isEmpty()) {
         emptyList()
@@ -63,7 +79,7 @@ fun TwitterError.Companion.fromJsonObject(json: Json, jsonObject: JsonObject): L
     }
 }
 
-suspend fun ClientRequestException.asTwitterApiException(json: Json): TwitterApiException? {
+internal suspend fun ClientRequestException.asTwitterApiException(json: Json): TwitterApiException? {
     val resText = response.content.readUTF8Line() ?: return null
     val jsonRes = json.decodeFromString<JsonObject>(resText)
     if (jsonRes.containsKey("errors")) {
@@ -74,4 +90,4 @@ suspend fun ClientRequestException.asTwitterApiException(json: Json): TwitterApi
     }
 }
 
-fun List<TwitterError>.asException(): TwitterApiException = TwitterApiException(this)
+internal fun List<TwitterError>.asException(): TwitterApiException = TwitterApiException(this)

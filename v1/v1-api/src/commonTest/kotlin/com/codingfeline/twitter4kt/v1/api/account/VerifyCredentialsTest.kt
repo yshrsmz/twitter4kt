@@ -1,3 +1,19 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.v1.api.account
 
 import com.codingfeline.twitter4kt.TEST_ACCESS_TOKEN
@@ -10,6 +26,10 @@ import com.codingfeline.twitter4kt.core.Twitter
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.startSession
 import com.codingfeline.twitter4kt.v1.api.runTest
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
+import io.ktor.client.features.logging.SIMPLE
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -32,6 +52,12 @@ class VerifyCredentialsTest {
     fun test() = runTest {
         val twitter = Twitter {
             this.consumerKeys = this@VerifyCredentialsTest.consumerKeys
+            this.httpClientConfig = {
+                install(Logging) {
+                    logger = Logger.SIMPLE
+                    level = LogLevel.ALL
+                }
+            }
         }
 
         val apiClient = twitter.startSession(accessToken)

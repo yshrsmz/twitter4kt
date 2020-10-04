@@ -1,3 +1,19 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.ConsumerKeys
@@ -16,21 +32,21 @@ import io.ktor.util.AttributeKey
 import kotlinx.datetime.Clock
 import kotlin.collections.set
 
-class OAuthFlowHeaders(
-    val consumerKeys: ConsumerKeys,
-    val oAuthConfig: OAuthConfig,
-    val clock: Clock
+internal class OAuthFlowHeaders(
+    internal val consumerKeys: ConsumerKeys,
+    internal val oAuthConfig: OAuthConfig,
+    internal val clock: Clock
 ) {
 
-    class Configuration {
-        lateinit var consumerKeys: ConsumerKeys
-        lateinit var oAuthConfig: OAuthConfig
-        lateinit var clock: Clock
+    internal class Configuration {
+        internal lateinit var consumerKeys: ConsumerKeys
+        internal lateinit var oAuthConfig: OAuthConfig
+        internal lateinit var clock: Clock
 
         internal fun build(): OAuthFlowHeaders = OAuthFlowHeaders(consumerKeys, oAuthConfig, clock)
     }
 
-    companion object Feature : HttpClientFeature<Configuration, OAuthFlowHeaders> {
+    internal companion object Feature : HttpClientFeature<Configuration, OAuthFlowHeaders> {
         override val key: AttributeKey<OAuthFlowHeaders> = AttributeKey("OAuthFlowHeaders")
 
         @OptIn(ExperimentalStdlibApi::class)
@@ -45,7 +61,8 @@ class OAuthFlowHeaders(
                         if (feature.oAuthConfig.xAuthAccessType != null) {
                             this["x_auth_access_type"] = feature.oAuthConfig.xAuthAccessType.value
                         }
-                    })
+                    }
+                )
             }
         }
 
@@ -55,20 +72,20 @@ class OAuthFlowHeaders(
     }
 }
 
-class OAuthRequestHeaders(
-    val consumerKeys: ConsumerKeys,
-    val accessToken: AccessToken,
-    val clock: Clock
+internal class OAuthRequestHeaders(
+    internal val consumerKeys: ConsumerKeys,
+    internal val accessToken: AccessToken,
+    internal val clock: Clock
 ) {
-    class Configuration {
-        lateinit var consumerKeys: ConsumerKeys
-        lateinit var accessToken: AccessToken
-        lateinit var clock: Clock
+    internal class Configuration {
+        internal lateinit var consumerKeys: ConsumerKeys
+        internal lateinit var accessToken: AccessToken
+        internal lateinit var clock: Clock
 
         internal fun build(): OAuthRequestHeaders = OAuthRequestHeaders(consumerKeys, accessToken, clock)
     }
 
-    companion object Feature : HttpClientFeature<Configuration, OAuthRequestHeaders> {
+    internal companion object Feature : HttpClientFeature<Configuration, OAuthRequestHeaders> {
         override val key: AttributeKey<OAuthRequestHeaders> = AttributeKey("OAuthRequestHeaders")
 
         override fun install(feature: OAuthRequestHeaders, scope: HttpClient) {
@@ -85,7 +102,6 @@ class OAuthRequestHeaders(
         override fun prepare(block: Configuration.() -> Unit): OAuthRequestHeaders {
             return Configuration().apply(block).build()
         }
-
     }
 }
 

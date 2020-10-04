@@ -43,7 +43,6 @@ kotlin {
                 api(project(Deps.Twitter4kt.coreApi))
                 api(project(Deps.Twitter4kt.v1Model))
             }
-
         }
         val commonTest by getting {
             dependencies {

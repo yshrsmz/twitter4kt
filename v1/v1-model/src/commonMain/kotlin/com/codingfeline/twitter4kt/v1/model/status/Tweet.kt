@@ -1,3 +1,19 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.v1.model.status
 
 import com.codingfeline.twitter4kt.v1.model.Place
@@ -6,7 +22,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Tweet(
+public data class Tweet(
     @SerialName("created_at") val createdAt: String,
     @SerialName("id") val id: Long,
     @SerialName("id_str") val idStr: String,
@@ -44,14 +60,14 @@ data class Tweet(
     @SerialName("contributors") val contributors: List<Contributor>? = emptyList(),
 ) {
     @Serializable
-    data class Contributor(
+    public data class Contributor(
         @SerialName("id") val id: Long,
         @SerialName("id_str") val idStr: String,
         @SerialName("screen_name") val screenName: String
     )
 
     @Serializable
-    data class Coordinate(
+    public data class Coordinate(
         @SerialName("coordinates") val coordinate: List<Float>,
         @SerialName("type") val type: String
     )

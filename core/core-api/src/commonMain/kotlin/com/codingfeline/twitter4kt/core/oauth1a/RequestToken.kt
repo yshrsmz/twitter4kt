@@ -1,9 +1,27 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.apiUrl
 import com.codingfeline.twitter4kt.core.model.oauth1a.RequestToken
+import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
 
+@OptIn(Twitter4ktInternalAPI::class)
 private fun RequestToken.buildAuthUrlInternal(path: String, forceLogin: Boolean?, screenName: String?): String {
     return apiUrl(path)
         .also { urlBuilder ->
@@ -28,7 +46,7 @@ private fun RequestToken.buildAuthUrlInternal(path: String, forceLogin: Boolean?
  * @param forceLogin Forces the user to enter their credentials to ensure the correct users account is authorized.
  * @param screenName Prefills the username input box of the OAuth login screen with the given value.
  */
-fun RequestToken.authorizationUrl(forceLogin: Boolean? = null, screenName: String? = null): String {
+public fun RequestToken.authorizationUrl(forceLogin: Boolean? = null, screenName: String? = null): String {
     return buildAuthUrlInternal("oauth/authorize", forceLogin, screenName)
 }
 
@@ -46,6 +64,6 @@ fun RequestToken.authorizationUrl(forceLogin: Boolean? = null, screenName: Strin
  * @param forceLogin Forces the user to enter their credentials to ensure the correct users account is authorized.
  * @param screenName Prefills the username input box of the OAuth login screen with the given value.
  */
-fun RequestToken.authenticationUrl(forceLogin: Boolean? = null, screenName: String? = null): String {
+public fun RequestToken.authenticationUrl(forceLogin: Boolean? = null, screenName: String? = null): String {
     return buildAuthUrlInternal("oauth/authenticate", forceLogin, screenName)
 }

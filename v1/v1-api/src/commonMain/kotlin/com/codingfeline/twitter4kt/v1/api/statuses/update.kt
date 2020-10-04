@@ -1,7 +1,24 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.v1.api.statuses
 
 import com.codingfeline.twitter4kt.core.apiUrl
 import com.codingfeline.twitter4kt.core.model.ApiResult
+import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
 import com.codingfeline.twitter4kt.v1.api.postInternal
 import com.codingfeline.twitter4kt.v1.model.status.Tweet
@@ -35,7 +52,8 @@ import io.ktor.http.Parameters
  * @param failDMCommands When set to `true`, causes any status text that starts with shortcode commands to return an API error. When set to `false`, allows shortcode commands to be sent in the status text and acted on by the API.
  * @param cardUri Associate an ads card with the Tweet using the `card_uri` value from any ads card response.
  */
-suspend fun StatusesApi.update(
+@OptIn(Twitter4ktInternalAPI::class)
+public suspend fun StatusesApi.update(
     status: String,
     inReplyToStatusId: String? = null,
     autoPopulateReplyMetadata: Boolean? = null,

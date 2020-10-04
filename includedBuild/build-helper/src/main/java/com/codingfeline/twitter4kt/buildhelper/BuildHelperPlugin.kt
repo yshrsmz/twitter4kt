@@ -1,3 +1,19 @@
+/**
+ * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 package com.codingfeline.twitter4kt.buildhelper
 
 import org.gradle.api.JavaVersion
@@ -13,7 +29,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.File
-import java.util.*
+import java.util.Properties
 
 const val TESTCONFIG_DIR = "testconfig"
 
@@ -49,6 +65,7 @@ class BuildHelperPlugin : Plugin<Project> {
             targetCompatibility = JavaVersion.VERSION_1_8
         }
         kotlinMultiplatformExtension.apply {
+            explicitApi()
             sourceSets.all {
                 languageSettings
                     .useExperimentalAnnotation("kotlin.RequiresOptIn")
@@ -82,12 +99,12 @@ class BuildHelperPlugin : Plugin<Project> {
         tasks.findByName("compileTestKotlinJvm")?.dependsOn(task)
 
         kotlinMultiplatformExtension.sourceSets.getByName("commonTest")
-            .kotlin.srcDir("${buildDir}/$TESTCONFIG_DIR")
+            .kotlin.srcDir("$buildDir/$TESTCONFIG_DIR")
     }
 
     private fun Project.createTestConfigTask(): TaskProvider<Task> {
         val task = tasks.register("createTestConfig") {
-            val outputDir = File("${buildDir}/$TESTCONFIG_DIR")
+            val outputDir = File("$buildDir/$TESTCONFIG_DIR")
             val consumerKey = secrets["twitter_consumer_key"]
             val consumerSecret = secrets["twitter_consumer_secret"]
             val accessToken = secrets["twitter_access_token"]
