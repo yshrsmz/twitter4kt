@@ -49,6 +49,7 @@ class BuildHelperPlugin : Plugin<Project> {
             targetCompatibility = JavaVersion.VERSION_1_8
         }
         kotlinMultiplatformExtension.apply {
+            explicitApi()
             sourceSets.all {
                 languageSettings
                     .useExperimentalAnnotation("kotlin.RequiresOptIn")

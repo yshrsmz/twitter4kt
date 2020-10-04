@@ -4,20 +4,20 @@ import com.codingfeline.twitter4kt.core.oauth1a.OAuthConfig
 import io.ktor.client.HttpClientConfig
 import kotlinx.datetime.Clock
 
-class TwitterConfig(
-    val consumerKeys: ConsumerKeys,
-    val httpClientConfig: HttpClientConfig<*>.() -> Unit,
-    val clock: Clock
+public class TwitterConfig(
+    public val consumerKeys: ConsumerKeys,
+    public val httpClientConfig: HttpClientConfig<*>.() -> Unit,
+    public val clock: Clock
 ) {
-    companion object {}
+    public companion object {}
 
-    class Builder {
-        var consumerKeys: ConsumerKeys? = null
-        var httpClientConfig: HttpClientConfig<*>.() -> Unit = { /* no-op */ }
-        var oAuthConfig: OAuthConfig? = null
-        var clock: Clock = Clock.System
+    public class Builder {
+        public var consumerKeys: ConsumerKeys? = null
+        public var httpClientConfig: HttpClientConfig<*>.() -> Unit = { /* no-op */ }
+        public var oAuthConfig: OAuthConfig? = null
+        public var clock: Clock = Clock.System
 
-        fun build(): TwitterConfig {
+        public fun build(): TwitterConfig {
             val consumerKeys = requireNotNull(this.consumerKeys) { "ConsumerKeys must be provideD" }
 
             return TwitterConfig(

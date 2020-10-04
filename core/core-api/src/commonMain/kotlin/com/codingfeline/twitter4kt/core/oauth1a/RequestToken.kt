@@ -2,8 +2,10 @@ package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.apiUrl
 import com.codingfeline.twitter4kt.core.model.oauth1a.RequestToken
+import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
 
+@OptIn(Twitter4ktInternalAPI::class)
 private fun RequestToken.buildAuthUrlInternal(path: String, forceLogin: Boolean?, screenName: String?): String {
     return apiUrl(path)
         .also { urlBuilder ->
@@ -28,7 +30,7 @@ private fun RequestToken.buildAuthUrlInternal(path: String, forceLogin: Boolean?
  * @param forceLogin Forces the user to enter their credentials to ensure the correct users account is authorized.
  * @param screenName Prefills the username input box of the OAuth login screen with the given value.
  */
-fun RequestToken.authorizationUrl(forceLogin: Boolean? = null, screenName: String? = null): String {
+public fun RequestToken.authorizationUrl(forceLogin: Boolean? = null, screenName: String? = null): String {
     return buildAuthUrlInternal("oauth/authorize", forceLogin, screenName)
 }
 
@@ -46,6 +48,6 @@ fun RequestToken.authorizationUrl(forceLogin: Boolean? = null, screenName: Strin
  * @param forceLogin Forces the user to enter their credentials to ensure the correct users account is authorized.
  * @param screenName Prefills the username input box of the OAuth login screen with the given value.
  */
-fun RequestToken.authenticationUrl(forceLogin: Boolean? = null, screenName: String? = null): String {
+public fun RequestToken.authenticationUrl(forceLogin: Boolean? = null, screenName: String? = null): String {
     return buildAuthUrlInternal("oauth/authenticate", forceLogin, screenName)
 }

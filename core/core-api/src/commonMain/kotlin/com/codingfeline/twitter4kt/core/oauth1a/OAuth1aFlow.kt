@@ -6,6 +6,7 @@ import com.codingfeline.twitter4kt.core.model.ApiResult
 import com.codingfeline.twitter4kt.core.model.error.TwitterOAuthException
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.model.oauth1a.RequestToken
+import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -17,7 +18,7 @@ import io.ktor.http.parseQueryString
 import io.ktor.utils.io.readUTF8Line
 import kotlinx.datetime.Clock
 
-class OAuth1aFlow(
+public class OAuth1aFlow(
     private val consumerKeys: ConsumerKeys,
     private val oAuthConfig: OAuthConfig,
     private val httpClientConfig: HttpClientConfig<*>.() -> Unit = {}
@@ -43,7 +44,7 @@ class OAuth1aFlow(
      *
      * [Twitter API reference](https://developer.twitter.com/en/docs/authentication/api-reference/request_token)
      */
-    suspend fun fetchRequestToken(): ApiResult<RequestToken> {
+    public suspend fun fetchRequestToken(): ApiResult<RequestToken> {
         val url = apiUrl("oauth/request_token").build()
 
         val result = kotlin.runCatching {
@@ -80,7 +81,8 @@ class OAuth1aFlow(
      * If you are using out-of-band OAuth, set this value to the pin-code. For OAuth 1.0a compliance this parameter is required.
      * OAuth 1.0a is strictly enforced and applications not using the oauth_verifier will fail to complete the OAuth flow.
      */
-    suspend fun fetchAccessToken(oAuthToken: String, oAuthVerifier: String): ApiResult<AccessToken> {
+    @OptIn(Twitter4ktInternalAPI::class)
+    public suspend fun fetchAccessToken(oAuthToken: String, oAuthVerifier: String): ApiResult<AccessToken> {
         val url = apiUrl("oauth/access_token").build()
 
         val result = kotlin.runCatching {

@@ -6,10 +6,10 @@ import com.codingfeline.twitter4kt.core.session.ExtendableApiClient
 import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 
 @OptIn(Twitter4ktInternalAPI::class)
-class StatusesApi(
+public class StatusesApi(
     override val apiClient: ExtendableApiClient
 ) : Endpoint
 
 @OptIn(Twitter4ktInternalAPI::class)
-val ApiClient.statuses: StatusesApi
+public val ApiClient.statuses: StatusesApi
     get() = StatusesApi(this as ExtendableApiClient)

@@ -54,7 +54,7 @@ internal suspend inline fun <reified T> ExtendableApiClient.postInternal(url: Ur
     }
 }
 
-fun TwitterError.Companion.fromJsonObject(json: Json, jsonObject: JsonObject): List<TwitterError> {
+internal fun TwitterError.Companion.fromJsonObject(json: Json, jsonObject: JsonObject): List<TwitterError> {
     val errors = jsonObject.getValue("errors").jsonArray
     return if (errors.isEmpty()) {
         emptyList()
@@ -63,7 +63,7 @@ fun TwitterError.Companion.fromJsonObject(json: Json, jsonObject: JsonObject): L
     }
 }
 
-suspend fun ClientRequestException.asTwitterApiException(json: Json): TwitterApiException? {
+internal suspend fun ClientRequestException.asTwitterApiException(json: Json): TwitterApiException? {
     val resText = response.content.readUTF8Line() ?: return null
     val jsonRes = json.decodeFromString<JsonObject>(resText)
     if (jsonRes.containsKey("errors")) {
@@ -74,4 +74,4 @@ suspend fun ClientRequestException.asTwitterApiException(json: Json): TwitterApi
     }
 }
 
-fun List<TwitterError>.asException(): TwitterApiException = TwitterApiException(this)
+internal fun List<TwitterError>.asException(): TwitterApiException = TwitterApiException(this)

@@ -43,4 +43,4 @@ internal fun createSignature(
     return hmacSha1(signingKey, baseString)
 }
 
-expect fun hmacSha1(key: String, text: String): String
+internal expect fun hmacSha1(key: String, text: String): String

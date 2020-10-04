@@ -10,7 +10,7 @@ private val NONCE_CHARS = arrayOf(
     '4', '5', '6', '7', '8', '9'
 )
 
-fun getNonce(seed: Long, size: Int = 32): String {
+internal fun getNonce(seed: Long, size: Int = 32): String {
     val random = Random(seed)
     val charLength = NONCE_CHARS.size
 

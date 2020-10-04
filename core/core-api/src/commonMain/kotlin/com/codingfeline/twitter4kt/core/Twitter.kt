@@ -6,19 +6,19 @@ import com.codingfeline.twitter4kt.core.oauth1a.OAuthConfig
 import com.codingfeline.twitter4kt.core.session.ApiClient
 
 @Suppress("FunctionName")
-fun Twitter(block: TwitterConfig.Builder.() -> Unit): Twitter {
+public fun Twitter(block: TwitterConfig.Builder.() -> Unit): Twitter {
     return Twitter(config = TwitterConfig.Builder().apply(block).build())
 }
 
-class Twitter(
+public class Twitter(
     internal val config: TwitterConfig
 ) {
 
-    companion object
+    public companion object
 }
 
 
-fun Twitter.launchOAuth1aFlow(oAuthConfig: OAuthConfig = OAuthConfig()): OAuth1aFlow {
+public fun Twitter.launchOAuth1aFlow(oAuthConfig: OAuthConfig = OAuthConfig()): OAuth1aFlow {
     return OAuth1aFlow(
         consumerKeys = config.consumerKeys,
         oAuthConfig = oAuthConfig,
@@ -26,7 +26,7 @@ fun Twitter.launchOAuth1aFlow(oAuthConfig: OAuthConfig = OAuthConfig()): OAuth1a
     )
 }
 
-fun Twitter.startSession(accessToken: AccessToken): ApiClient {
+public fun Twitter.startSession(accessToken: AccessToken): ApiClient {
     return ApiClient(
         consumerKeys = config.consumerKeys,
         accessToken = accessToken,

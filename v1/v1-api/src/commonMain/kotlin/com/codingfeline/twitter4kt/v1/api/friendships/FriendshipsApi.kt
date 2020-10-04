@@ -5,10 +5,10 @@ import com.codingfeline.twitter4kt.core.session.Endpoint
 import com.codingfeline.twitter4kt.core.session.ExtendableApiClient
 import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 
-class FriendshipsApi @OptIn(Twitter4ktInternalAPI::class) constructor(
+public class FriendshipsApi @OptIn(Twitter4ktInternalAPI::class) constructor(
     override val apiClient: ExtendableApiClient
 ) : Endpoint
 
 @OptIn(Twitter4ktInternalAPI::class)
-val ApiClient.friendships: FriendshipsApi
+public val ApiClient.friendships: FriendshipsApi
     get() = FriendshipsApi(this as ExtendableApiClient)

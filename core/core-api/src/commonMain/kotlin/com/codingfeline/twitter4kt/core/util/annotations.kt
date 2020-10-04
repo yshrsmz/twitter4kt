@@ -19,4 +19,4 @@ package com.codingfeline.twitter4kt.core.util
     AnnotationTarget.FIELD,
     AnnotationTarget.CONSTRUCTOR
 )
-annotation class Twitter4ktInternalAPI
+public annotation class Twitter4ktInternalAPI

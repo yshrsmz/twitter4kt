@@ -10,6 +10,10 @@ import com.codingfeline.twitter4kt.core.Twitter
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.startSession
 import com.codingfeline.twitter4kt.v1.api.runTest
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
+import io.ktor.client.features.logging.SIMPLE
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -32,6 +36,12 @@ class VerifyCredentialsTest {
     fun test() = runTest {
         val twitter = Twitter {
             this.consumerKeys = this@VerifyCredentialsTest.consumerKeys
+            this.httpClientConfig = {
+                install(Logging) {
+                    logger = Logger.SIMPLE
+                    level = LogLevel.ALL
+                }
+            }
         }
 
         val apiClient = twitter.startSession(accessToken)

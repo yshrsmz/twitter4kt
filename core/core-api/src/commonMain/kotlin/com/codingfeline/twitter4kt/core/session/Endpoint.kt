@@ -1,5 +1,5 @@
 package com.codingfeline.twitter4kt.core.session
 
-interface Endpoint {
-    val apiClient: ApiClient
+public interface Endpoint {
+    public val apiClient: ApiClient
 }

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * [Twitter API reference](https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/overview/geo-objects)
  */
 @Serializable
-data class Place(
+public data class Place(
     @SerialName("id") val id: String,
     @SerialName("url") val url: String,
     @SerialName("place_type") val placeType: String,
@@ -19,7 +19,7 @@ data class Place(
     @SerialName("attributes") val attributes: Attribute,
 ) {
     @Serializable
-    data class Attribute(
+    public data class Attribute(
         @SerialName("street_address") val streetAddress: String? = null,
         @SerialName("locality") val locality: String? = null,
         @SerialName("region") val region: String? = null,
@@ -33,7 +33,7 @@ data class Place(
     )
 
     @Serializable
-    data class BoundingBox(
+    public data class BoundingBox(
         @SerialName("type") val type: String,
         @SerialName("coordinates") val coordinates: List<List<List<Float>>>
     )

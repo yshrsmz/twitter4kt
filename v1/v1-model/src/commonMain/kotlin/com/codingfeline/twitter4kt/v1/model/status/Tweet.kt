@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Tweet(
+public data class Tweet(
     @SerialName("created_at") val createdAt: String,
     @SerialName("id") val id: Long,
     @SerialName("id_str") val idStr: String,
@@ -44,14 +44,14 @@ data class Tweet(
     @SerialName("contributors") val contributors: List<Contributor>? = emptyList(),
 ) {
     @Serializable
-    data class Contributor(
+    public data class Contributor(
         @SerialName("id") val id: Long,
         @SerialName("id_str") val idStr: String,
         @SerialName("screen_name") val screenName: String
     )
 
     @Serializable
-    data class Coordinate(
+    public data class Coordinate(
         @SerialName("coordinates") val coordinate: List<Float>,
         @SerialName("type") val type: String
     )

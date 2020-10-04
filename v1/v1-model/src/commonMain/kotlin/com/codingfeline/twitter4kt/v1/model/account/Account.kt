@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Account(
+public data class Account(
     @SerialName("id") val id: Long,
     @SerialName("id_str") val idStr: String,
     @SerialName("name") val name: String,

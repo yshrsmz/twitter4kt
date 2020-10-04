@@ -11,15 +11,15 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import kotlinx.datetime.Clock
 import kotlinx.serialization.json.Json
 
-interface ApiClient {
-    val consumerKeys: ConsumerKeys
-    val accessToken: AccessToken
+public interface ApiClient {
+    public val consumerKeys: ConsumerKeys
+    public val accessToken: AccessToken
 }
 
 @Twitter4ktInternalAPI
-interface ExtendableApiClient : ApiClient {
-    val json: Json
-    val httpClient: HttpClient
+public interface ExtendableApiClient : ApiClient {
+    public val json: Json
+    public val httpClient: HttpClient
 }
 
 @OptIn(Twitter4ktInternalAPI::class)
@@ -56,7 +56,7 @@ internal class ApiClientImpl constructor(
 }
 
 @Suppress("FunctionName")
-fun ApiClient(
+internal fun ApiClient(
     consumerKeys: ConsumerKeys,
     accessToken: AccessToken,
     clock: Clock,

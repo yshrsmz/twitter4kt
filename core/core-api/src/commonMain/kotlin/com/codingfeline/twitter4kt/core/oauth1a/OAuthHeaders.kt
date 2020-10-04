@@ -16,21 +16,21 @@ import io.ktor.util.AttributeKey
 import kotlinx.datetime.Clock
 import kotlin.collections.set
 
-class OAuthFlowHeaders(
-    val consumerKeys: ConsumerKeys,
-    val oAuthConfig: OAuthConfig,
-    val clock: Clock
+internal class OAuthFlowHeaders(
+    internal val consumerKeys: ConsumerKeys,
+    internal val oAuthConfig: OAuthConfig,
+    internal val clock: Clock
 ) {
 
-    class Configuration {
-        lateinit var consumerKeys: ConsumerKeys
-        lateinit var oAuthConfig: OAuthConfig
-        lateinit var clock: Clock
+    internal class Configuration {
+        internal lateinit var consumerKeys: ConsumerKeys
+        internal lateinit var oAuthConfig: OAuthConfig
+        internal lateinit var clock: Clock
 
         internal fun build(): OAuthFlowHeaders = OAuthFlowHeaders(consumerKeys, oAuthConfig, clock)
     }
 
-    companion object Feature : HttpClientFeature<Configuration, OAuthFlowHeaders> {
+    internal companion object Feature : HttpClientFeature<Configuration, OAuthFlowHeaders> {
         override val key: AttributeKey<OAuthFlowHeaders> = AttributeKey("OAuthFlowHeaders")
 
         @OptIn(ExperimentalStdlibApi::class)
@@ -55,20 +55,20 @@ class OAuthFlowHeaders(
     }
 }
 
-class OAuthRequestHeaders(
-    val consumerKeys: ConsumerKeys,
-    val accessToken: AccessToken,
-    val clock: Clock
+internal class OAuthRequestHeaders(
+    internal val consumerKeys: ConsumerKeys,
+    internal val accessToken: AccessToken,
+    internal val clock: Clock
 ) {
-    class Configuration {
-        lateinit var consumerKeys: ConsumerKeys
-        lateinit var accessToken: AccessToken
-        lateinit var clock: Clock
+    internal class Configuration {
+        internal lateinit var consumerKeys: ConsumerKeys
+        internal lateinit var accessToken: AccessToken
+        internal lateinit var clock: Clock
 
         internal fun build(): OAuthRequestHeaders = OAuthRequestHeaders(consumerKeys, accessToken, clock)
     }
 
-    companion object Feature : HttpClientFeature<Configuration, OAuthRequestHeaders> {
+    internal companion object Feature : HttpClientFeature<Configuration, OAuthRequestHeaders> {
         override val key: AttributeKey<OAuthRequestHeaders> = AttributeKey("OAuthRequestHeaders")
 
         override fun install(feature: OAuthRequestHeaders, scope: HttpClient) {

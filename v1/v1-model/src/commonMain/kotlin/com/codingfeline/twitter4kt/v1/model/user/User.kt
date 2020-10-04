@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  * [Twitter API reference](https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/overview/user-object)
  */
 @Serializable
-data class User(
+public data class User(
     @SerialName("id") val id: Long,
     @SerialName("id_str") val idStr: String,
     @SerialName("name") val name: String,
