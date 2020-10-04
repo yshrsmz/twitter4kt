@@ -3,6 +3,8 @@ object Versions {
     const val mavenPublish = "0.13.0"
     const val versions = "0.33.0"
     const val gradle = "6.6.1"
+    const val spotless = "5.6.1"
+    const val ktlint = "0.39.0"
 
     const val ktor = "1.4.1"
 }
@@ -14,6 +16,7 @@ object Plugins {
     const val dokka = "org.jetbrains.dokka"
     const val multiplatform = "org.jetbrains.kotlin.multiplatform"
     const val serialization = "org.jetbrains.kotlin.plugin.serialization"
+    const val spotless = "com.diffplug.spotless"
 }
 
 object Deps {
