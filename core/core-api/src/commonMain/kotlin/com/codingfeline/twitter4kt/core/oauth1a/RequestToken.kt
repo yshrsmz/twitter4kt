@@ -2,19 +2,16 @@ package com.codingfeline.twitter4kt.core.oauth1a
 
 import com.codingfeline.twitter4kt.core.apiUrl
 import com.codingfeline.twitter4kt.core.model.oauth1a.RequestToken
+import com.codingfeline.twitter4kt.core.util.appendNotNulls
 
 private fun RequestToken.buildAuthUrlInternal(path: String, forceLogin: Boolean?, screenName: String?): String {
     return apiUrl(path)
-        .also {
-            it.parameters["oauth_token"] = token
-
-            if (forceLogin != null) {
-                it.parameters["force_login"] = forceLogin.toString()
-            }
-
-            if (!screenName.isNullOrBlank()) {
-                it.parameters["screen_name"] = screenName
-            }
+        .also { urlBuilder ->
+            urlBuilder.parameters.appendNotNulls(
+                "oauth_token" to token,
+                "force_login" to forceLogin,
+                "screen_name" to screenName?.takeIf { it.isNotBlank() }
+            )
         }
         .buildString()
 }

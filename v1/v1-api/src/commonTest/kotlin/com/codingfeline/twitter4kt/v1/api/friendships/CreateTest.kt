@@ -7,10 +7,10 @@ import com.codingfeline.twitter4kt.TEST_CONSUMER_SECRET
 import com.codingfeline.twitter4kt.TEST_USER_ID
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.Twitter
+import com.codingfeline.twitter4kt.core.model.ApiResult
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.startSession
 import com.codingfeline.twitter4kt.v1.api.runTest
-import com.codingfeline.twitter4kt.v1.model.ApiResult
 import io.ktor.client.features.ClientRequestException
 import io.ktor.utils.io.readUTF8Line
 import kotlin.test.Ignore
