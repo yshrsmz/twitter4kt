@@ -19,6 +19,7 @@ plugins {
 repositories {
     mavenCentral()
     jcenter()
+    maven(url = "https://kotlin.bintray.com/kotlinx/") // needed for kotlinx-datetime
     maven(url = "https://dl.bintray.com/yshrsmz/twitter4kt")
 }
 
