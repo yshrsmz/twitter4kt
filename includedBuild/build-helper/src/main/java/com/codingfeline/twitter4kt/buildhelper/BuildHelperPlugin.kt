@@ -49,8 +49,8 @@ class BuildHelperPlugin : Plugin<Project> {
             afterEvaluate {
                 configureKotlin()
                 configureApiModules()
-                configureMavenPublications()
             }
+            configureMavenPublications()
         }
     }
 
