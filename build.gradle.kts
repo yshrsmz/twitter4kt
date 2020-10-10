@@ -1,5 +1,6 @@
 plugins {
-    id(Plugins.buildHelper)
+    id("dependencies")
+    id("build-helper")
     id(Plugins.versions) version Versions.versions
     id(Plugins.spotless) version Versions.spotless
     id(Plugins.dokka) version Versions.kotlin apply false
@@ -36,7 +37,7 @@ spotless {
             "**/gen/**/*.*",
             "**/generated/**/*.*",
             "**/testconfig/**/*.*",
-            "buildSrc/src/main/java/Dependencies.kt"
+            "includedBuild/dependencies/src/main/java/Deps.kt"
         )
         ktlint(Versions.ktlint)
         trimTrailingWhitespace()

@@ -10,6 +10,7 @@ pluginManagement {
 }
 rootProject.name = "twitter4kt"
 
+includeBuild("includedBuild/dependencies")
 includeBuild("includedBuild/build-helper")
 
 include(
