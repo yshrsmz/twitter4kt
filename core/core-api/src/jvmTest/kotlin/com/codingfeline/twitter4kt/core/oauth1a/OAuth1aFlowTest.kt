@@ -19,7 +19,7 @@ package com.codingfeline.twitter4kt.core.oauth1a
 import com.codingfeline.twitter4kt.TEST_CONSUMER_KEY
 import com.codingfeline.twitter4kt.TEST_CONSUMER_SECRET
 import com.codingfeline.twitter4kt.core.ConsumerKeys
-import com.codingfeline.twitter4kt.core.model.fold
+import com.codingfeline.twitter4kt.core.fold
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging

@@ -16,9 +16,9 @@
  */
 package com.codingfeline.twitter4kt.core.oauth1a
 
+import com.codingfeline.twitter4kt.core.ApiResult
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.apiUrl
-import com.codingfeline.twitter4kt.core.model.ApiResult
 import com.codingfeline.twitter4kt.core.model.error.TwitterOAuthException
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.model.oauth1a.RequestToken

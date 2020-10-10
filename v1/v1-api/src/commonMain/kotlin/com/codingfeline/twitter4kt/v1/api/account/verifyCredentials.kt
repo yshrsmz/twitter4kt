@@ -16,8 +16,8 @@
  */
 package com.codingfeline.twitter4kt.v1.api.account
 
+import com.codingfeline.twitter4kt.core.ApiResult
 import com.codingfeline.twitter4kt.core.apiUrl
-import com.codingfeline.twitter4kt.core.model.ApiResult
 import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
 import com.codingfeline.twitter4kt.v1.api.getInternal
