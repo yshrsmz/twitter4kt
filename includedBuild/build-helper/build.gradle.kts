@@ -1,6 +1,7 @@
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
+    id("dependencies")
 }
 
 repositories {
@@ -11,9 +12,11 @@ repositories {
 dependencies {
     compileOnly(gradleApi())
     compileOnly(gradleKotlinDsl())
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.4.10")
-    implementation("com.vanniktech:gradle-maven-publish-plugin:0.13.0")
+    implementation(PluginDeps.kotlin)
+    implementation(PluginDeps.dokka)
+    implementation(PluginDeps.mavenPublish)
+
+//    implementation("com.codingfeline.twitter4kt.dependencies:dependencies:SNAPSHOT")
 }
 
 kotlin {

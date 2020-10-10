@@ -2,7 +2,7 @@ object Versions {
     const val kotlin = "1.4.10"
     const val mavenPublish = "0.13.0"
     const val versions = "0.33.0"
-    const val gradle = "6.6.1"
+    const val gradle = "6.7-rc-4"
     const val spotless = "5.6.1"
     const val ktlint = "0.39.0"
 
@@ -19,6 +19,12 @@ object Plugins {
     const val spotless = "com.diffplug.spotless"
 }
 
+object PluginDeps {
+    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.kotlin}"
+    const val mavenPublish = "com.vanniktech:gradle-maven-publish-plugin:0.13.0"
+}
+
 object Deps {
 
     object Twitter4kt {
@@ -30,7 +36,7 @@ object Deps {
     }
 
     object Kotlin {
-        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0-RC2"
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
         const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.0"
 
