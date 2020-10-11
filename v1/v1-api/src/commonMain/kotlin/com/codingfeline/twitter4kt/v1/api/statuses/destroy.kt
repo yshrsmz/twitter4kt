@@ -39,6 +39,6 @@ import io.ktor.http.Parameters
 public suspend fun StatusesApi.destroy(
     id: Long
 ): ApiResult<Tweet> {
-    val url = apiUrl("1.1/statuses/$id.json").build()
+    val url = apiUrl("1.1/statuses/destroy/$id.json").build()
     return apiClient.postInternal<Tweet>(url, Parameters.build { })
 }
