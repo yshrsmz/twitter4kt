@@ -87,7 +87,8 @@ public suspend fun StatusesApi.update(
             "trim_user" to trimUser,
             "enable_dmcommands" to enableDMCommands,
             "fail_dmcommands" to failDMCommands,
-            "card_uri" to cardUri
+            "card_uri" to cardUri,
+            "tweet_mode" to "extended"
         )
     }
     return apiClient.postInternal<Tweet>(url, body)
