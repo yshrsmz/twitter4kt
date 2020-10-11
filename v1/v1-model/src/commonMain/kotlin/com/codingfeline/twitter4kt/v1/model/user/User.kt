@@ -41,7 +41,7 @@ public data class User(
     @SerialName("favourites_count") val favouritesCount: Int,
     @SerialName("statuses_count") val statusesCount: Int,
     @SerialName("created_at") val createdAt: String,
-    @SerialName("profile_banner_url") val profileBannerUrl: String,
+    @SerialName("profile_banner_url") val profileBannerUrl: String? = null,
     @SerialName("profile_image_url_https") val profileImageUrlHttps: String,
     @SerialName("default_profile") val defaultProfile: Boolean,
     @SerialName("default_profile_image") val defaultProfileImage: Boolean,
