@@ -34,18 +34,11 @@ import io.ktor.http.Parameters
  * [Twitter API reference](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/post-statuses-destroy-id)
  *
  * @param id The ID of the tweet authenticated user's tweet that should be deleted
- * @param trimUser When set to either `true` , `t` or `1` , the response will include a user object including only the author's ID. Omit this parameter to receive the complete user object.
  */
 @OptIn(Twitter4ktInternalAPI::class)
 public suspend fun StatusesApi.destroy(
-    id: Long,
-    trimUser: Boolean? = null,
+    id: Long
 ): ApiResult<Tweet> {
     val url = apiUrl("1.1/statuses/$id.json").build()
-    val body = Parameters.build {
-        appendNotNulls(
-            "trim_user" to trimUser
-        )
-    }
-    return apiClient.postInternal<Tweet>(url, body)
+    return apiClient.postInternal<Tweet>(url, Parameters.build { })
 }
