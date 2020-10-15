@@ -19,7 +19,6 @@ package com.codingfeline.twitter4kt.v1.api.statuses
 import com.codingfeline.twitter4kt.core.ApiResult
 import com.codingfeline.twitter4kt.core.apiUrl
 import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
-import com.codingfeline.twitter4kt.core.util.appendNotNulls
 import com.codingfeline.twitter4kt.v1.api.postInternal
 import com.codingfeline.twitter4kt.v1.model.status.Tweet
 import io.ktor.http.Parameters
@@ -40,5 +39,5 @@ public suspend fun StatusesApi.destroy(
     id: Long
 ): ApiResult<Tweet> {
     val url = apiUrl("1.1/statuses/destroy/$id.json").build()
-    return apiClient.postInternal<Tweet>(url, Parameters.build { })
+    return apiClient.postInternal(url, Parameters.build { })
 }
