@@ -35,17 +35,19 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.jsonArray
 
+private const val KEY_ERRORS = "errors"
+
 @OptIn(Twitter4ktInternalAPI::class)
 internal suspend inline fun <reified T> ExtendableApiClient.getInternal(url: Url): ApiResult<T> {
     return try {
         val result = httpClient.get<JsonObject>(url)
-        if (result.containsKey("errors")) {
+        if (result.containsKey(KEY_ERRORS)) {
             ApiResult.failure(TwitterError.fromJsonObject(json, result).asException())
         } else {
             ApiResult.success(json.decodeFromJsonElement(result))
         }
     } catch (e: ClientRequestException) {
-        ApiResult.failure(e)
+        ApiResult.failure(e.asTwitterApiException(json) ?: e)
     } catch (e: Exception) {
         ApiResult.failure(e)
     }
@@ -57,36 +59,34 @@ internal suspend inline fun <reified T> ExtendableApiClient.postInternal(url: Ur
         val result = httpClient.post<JsonObject>(url) {
             this.body = FormDataContent(body)
         }
-        if (result.containsKey("errors")) {
+        if (result.containsKey(KEY_ERRORS)) {
             ApiResult.failure(TwitterError.fromJsonObject(json, result).asException())
         } else {
             ApiResult.success(json.decodeFromJsonElement(result))
         }
     } catch (e: ClientRequestException) {
-        val resultException = e.asTwitterApiException(json) ?: e
-        ApiResult.failure(resultException)
+        ApiResult.failure(e.asTwitterApiException(json) ?: e)
     } catch (e: Exception) {
         ApiResult.failure(e)
     }
 }
 
 internal fun TwitterError.Companion.fromJsonObject(json: Json, jsonObject: JsonObject): List<TwitterError> {
-    val errors = jsonObject.getValue("errors").jsonArray
+    val errors = jsonObject.getValue(KEY_ERRORS).jsonArray
     return if (errors.isEmpty()) {
         emptyList()
     } else {
-        json.decodeFromJsonElement(ListSerializer(TwitterError.serializer()), errors)
+        json.decodeFromJsonElement(ListSerializer(serializer()), errors)
     }
 }
 
 internal suspend fun ClientRequestException.asTwitterApiException(json: Json): TwitterApiException? {
     val resText = response.content.readUTF8Line() ?: return null
     val jsonRes = json.decodeFromString<JsonObject>(resText)
-    if (jsonRes.containsKey("errors")) {
-        val errors = TwitterError.fromJsonObject(json, jsonRes)
-        return TwitterApiException(errors)
+    return if (jsonRes.containsKey(KEY_ERRORS)) {
+        TwitterError.fromJsonObject(json, jsonRes).asException()
     } else {
-        return null
+        null
     }
 }
 

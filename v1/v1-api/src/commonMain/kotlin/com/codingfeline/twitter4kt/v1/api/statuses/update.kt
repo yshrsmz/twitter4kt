@@ -90,5 +90,5 @@ public suspend fun StatusesApi.update(
             "card_uri" to cardUri
         )
     }
-    return apiClient.postInternal<Tweet>(url, body)
+    return apiClient.postInternal(url, body)
 }
