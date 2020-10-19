@@ -65,5 +65,5 @@ public suspend fun StatusesApi.userTimeline(
         )
     }
     val url = apiUrl("1.1/statuses/user_timeline.json", parameters = parameters)
-    return apiClient.getInternalListResponse<Tweet>(url.build())
+    return apiClient.getInternalListResponse(url.build())
 }

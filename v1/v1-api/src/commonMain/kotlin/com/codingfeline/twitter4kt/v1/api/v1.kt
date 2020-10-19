@@ -57,7 +57,7 @@ internal suspend inline fun <reified T> ExtendableApiClient.getInternalListRespo
         val response = httpClient.get<List<T>>(url)
         ApiResult.success(response)
     } catch (e: ClientRequestException) {
-        ApiResult.failure(e)
+        ApiResult.failure(e.asTwitterApiException(json) ?: e)
     } catch (e: Exception) {
         ApiResult.failure(e)
     }
