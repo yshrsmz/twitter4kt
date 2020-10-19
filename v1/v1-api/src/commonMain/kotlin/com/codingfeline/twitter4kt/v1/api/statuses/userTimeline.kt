@@ -36,7 +36,6 @@ import io.ktor.http.Parameters
  * @param count Specifies the number of records to retrieve. Must be less than or equal to 200. Defaults to 20. The value of count is best thought of as a limit to the number of tweets to return because suspended or deleted content is removed after the count has been applied.
  * @param sinceId Returns results with an ID greater than (that is, more recent than) the specified ID. There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available.
  * @param maxId Returns results with an ID less than (that is, older than) or equal to the specified ID.
- * @param trimUser When set to either `true` , `t` or `1` , the response will include a user object including only the author's ID. Omit this parameter to receive the complete user object.
  * @param excludeReplies This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count Tweets — this is because the count parameter retrieves that many Tweets before filtering out retweets and replies.
  * @param includeEntities The entities node will not be included when set to false.
  * @param includeRts When set to false , the timeline will strip any native retweets (though they will still count toward both the maximal length of the timeline and the slice selected by the count parameter). Note: If you're using the trim_user parameter in conjunction with include_rts, the retweets will still contain a full user object.
@@ -48,7 +47,6 @@ public suspend fun StatusesApi.userTimeline(
     count: Int? = null,
     sinceId: Long? = null,
     maxId: Long? = null,
-    trimUser: Boolean? = null,
     excludeReplies: Boolean? = null,
     includeEntities: Boolean? = null,
     includeRts: Boolean? = null
@@ -60,7 +58,6 @@ public suspend fun StatusesApi.userTimeline(
             "count" to count,
             "since_id" to sinceId,
             "max_id" to maxId,
-            "trim_user" to trimUser,
             "exclude_replies" to excludeReplies,
             "include_entities" to includeEntities,
             "include_rts" to includeRts,
