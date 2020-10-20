@@ -47,9 +47,9 @@ class BuildHelperPlugin : Plugin<Project> {
         target.subprojects {
             if (ignoreModules.contains(path)) return@subprojects
 
-            pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
-                this@subprojects.configureKotlin()
-                this@subprojects.configureApiModules()
+            afterEvaluate {
+                configureKotlin()
+                configureApiModules()
             }
             configureMavenPublications()
         }
@@ -97,7 +97,9 @@ class BuildHelperPlugin : Plugin<Project> {
     private fun Project.setupTestConfig() {
         val task = createTestConfigTask()
         // TODO depends on test tasks
-        tasks.findByName("compileTestKotlinJvm")?.dependsOn(task)
+        tasks.named("compileTestKotlinJvm") {
+            dependsOn(task)
+        }
 
         kotlinMultiplatformExtension.sourceSets.getByName("commonTest")
             .kotlin.srcDir("$buildDir/$TESTCONFIG_DIR")
