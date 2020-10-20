@@ -91,5 +91,5 @@ public suspend fun StatusesApi.update(
             "tweet_mode" to "extended"
         )
     }
-    return apiClient.postInternal<Tweet>(url, body)
+    return apiClient.postInternal(url, body)
 }
