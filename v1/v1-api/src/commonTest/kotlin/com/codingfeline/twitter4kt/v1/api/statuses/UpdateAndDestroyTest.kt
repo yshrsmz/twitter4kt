@@ -72,15 +72,17 @@ class UpdateAndDestroyTest {
                 val res = error.response.content.readUTF8Line()
                 println("res: $res")
             }
+            println(error)
         }
 
-        val resultDelete = apiClient.statuses.destroy(result.getOrNull()?.id ?: -1)
+        val resultDelete = apiClient.statuses.destroy(result.getOrNull()?.idStr!!)
         if (resultDelete.isFailure) {
             val error = (resultDelete as ApiResult.Failure).error
             if (error is ClientRequestException) {
                 val res = error.response.content.readUTF8Line()
                 println("res: $res")
             }
+            println(error)
         }
     }
 }
