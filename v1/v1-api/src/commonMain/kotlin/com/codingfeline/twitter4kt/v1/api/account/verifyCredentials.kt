@@ -37,7 +37,5 @@ public suspend fun AccountApi.verifyCredentials(
                 "include_email" to includeEmail
             )
         }.build()
-    val result = apiClient.getInternal<Account>(url)
-    println("account/verify_credentials.json: $result")
-    return result
+    return apiClient.getInternal(url)
 }

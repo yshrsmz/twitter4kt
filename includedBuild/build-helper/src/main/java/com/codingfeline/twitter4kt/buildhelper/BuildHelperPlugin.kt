@@ -46,9 +46,10 @@ class BuildHelperPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.subprojects {
             if (ignoreModules.contains(path)) return@subprojects
-            afterEvaluate {
-                configureKotlin()
-                configureApiModules()
+
+            pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
+                this@subprojects.configureKotlin()
+                this@subprojects.configureApiModules()
             }
             configureMavenPublications()
         }
