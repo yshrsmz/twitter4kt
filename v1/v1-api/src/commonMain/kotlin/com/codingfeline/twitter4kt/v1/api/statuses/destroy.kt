@@ -36,7 +36,7 @@ import io.ktor.http.Parameters
  */
 @OptIn(Twitter4ktInternalAPI::class)
 public suspend fun StatusesApi.destroy(
-    id: Long
+    id: String
 ): ApiResult<Tweet> {
     val url = apiUrl("1.1/statuses/destroy/$id.json").build()
     return apiClient.postInternal(url, Parameters.build { })

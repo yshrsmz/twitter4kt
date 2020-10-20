@@ -42,11 +42,11 @@ import io.ktor.http.Parameters
  */
 @OptIn(Twitter4ktInternalAPI::class)
 public suspend fun StatusesApi.userTimeline(
-    userId: Long? = null,
+    userId: String? = null,
     screenName: String? = null,
     count: Int? = null,
-    sinceId: Long? = null,
-    maxId: Long? = null,
+    sinceId: String? = null,
+    maxId: String? = null,
     excludeReplies: Boolean? = null,
     includeEntities: Boolean? = null,
     includeRts: Boolean? = null
