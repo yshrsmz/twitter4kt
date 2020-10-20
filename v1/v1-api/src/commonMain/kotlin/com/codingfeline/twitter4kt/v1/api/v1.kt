@@ -54,6 +54,18 @@ internal suspend inline fun <reified T> ExtendableApiClient.getInternal(url: Url
 }
 
 @OptIn(Twitter4ktInternalAPI::class)
+internal suspend inline fun <reified T> ExtendableApiClient.getInternalListResponse(url: Url): ApiResult<List<T>> {
+    return try {
+        val response = httpClient.get<List<T>>(url)
+        ApiResult.success(response)
+    } catch (e: ClientRequestException) {
+        ApiResult.failure(e.asTwitterApiException(json) ?: e)
+    } catch (e: Exception) {
+        ApiResult.failure(e)
+    }
+}
+
+@OptIn(Twitter4ktInternalAPI::class)
 internal suspend inline fun <reified T> ExtendableApiClient.postInternal(url: Url, body: Parameters): ApiResult<T> {
     return try {
         val result = httpClient.post<JsonObject>(url) {

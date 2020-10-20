@@ -46,12 +46,12 @@ public data class Entities(
         @SerialName("media_url") val mediaUrl: String,
         @SerialName("media_url_https") val mediaUrlHttps: String,
         @SerialName("sizes") val sizes: SizeList,
-        @SerialName("source_status_id") val sourceStatusId: Long,
-        @SerialName("source_status_id_str") val sourceStatusIdStr: String,
+        @SerialName("source_status_id") val sourceStatusId: Long? = null,
+        @SerialName("source_status_id_str") val sourceStatusIdStr: String? = null,
         @SerialName("type") val type: String,
         @SerialName("url") val url: String,
-        @SerialName("video_info") val videoInfo: VideoInfo?,
-        @SerialName("additional_media_info") val additionalMediaInfo: AdditionalMediaInfo?,
+        @SerialName("video_info") val videoInfo: VideoInfo? = null,
+        @SerialName("additional_media_info") val additionalMediaInfo: AdditionalMediaInfo? = null,
     ) {
         @Serializable
         public data class SizeList(
@@ -71,12 +71,12 @@ public data class Entities(
         @Serializable
         public data class VideoInfo(
             @SerialName("aspect_ratio") val aspectRatio: List<Int>,
-            @SerialName("duration_millis") val durationMillis: Int,
+            @SerialName("duration_millis") val durationMillis: Int? = null,
             @SerialName("variants") val variants: List<Variant>
         ) {
             @Serializable
             public data class Variant(
-                @SerialName("bitrate") val bitrate: Int?,
+                @SerialName("bitrate") val bitrate: Int? = null,
                 @SerialName("content_type") val contentType: String,
                 @SerialName("url") val url: String
             )
@@ -84,10 +84,10 @@ public data class Entities(
 
         @Serializable
         public data class AdditionalMediaInfo(
-            @SerialName("title") val title: String,
-            @SerialName("description") val description: String,
-            @SerialName("embeddable") val embeddable: Boolean,
-            @SerialName("monetizable") val monetizable: Boolean
+            @SerialName("title") val title: String? = null,
+            @SerialName("description") val description: String? = null,
+            @SerialName("embeddable") val embeddable: Boolean? = null,
+            @SerialName("monetizable") val monetizable: Boolean? = null
         )
     }
 
