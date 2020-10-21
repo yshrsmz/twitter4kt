@@ -25,9 +25,6 @@ public sealed class ApiResult<T> {
     public data class Success<T>(val value: T) : ApiResult<T>()
     public data class Failure<T>(val error: Throwable) : ApiResult<T>()
 
-    public val isSuccess: Boolean get() = this is Success
-    public val isFailure: Boolean get() = this is Failure
-
     public fun getOrNull(): T? {
         return when (this) {
             is Success -> this.value
@@ -46,6 +43,24 @@ public sealed class ApiResult<T> {
         public fun <T> success(value: T): Success<T> = Success(value)
         public fun <T> failure(error: Throwable): Failure<T> = Failure(error)
     }
+}
+
+@OptIn(ExperimentalContracts::class)
+public fun <T> ApiResult<T>.isSuccess(): Boolean {
+    contract {
+        returns(true) implies (this@isSuccess is ApiResult.Success)
+        returns(false) implies (this@isSuccess is ApiResult.Failure)
+    }
+    return this is ApiResult.Success
+}
+
+@OptIn(ExperimentalContracts::class)
+public fun <T> ApiResult<T>.isFailure(): Boolean {
+    contract {
+        returns(true) implies (this@isFailure is ApiResult.Failure)
+        returns(false) implies (this@isFailure is ApiResult.Success)
+    }
+    return this is ApiResult.Failure
 }
 
 @Suppress("unused", "NOTHING_TO_INLINE")
