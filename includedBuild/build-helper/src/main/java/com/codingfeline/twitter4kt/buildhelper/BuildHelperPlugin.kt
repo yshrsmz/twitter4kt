@@ -46,6 +46,7 @@ class BuildHelperPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.subprojects {
             if (ignoreModules.contains(path)) return@subprojects
+
             afterEvaluate {
                 configureKotlin()
                 configureApiModules()
@@ -96,7 +97,9 @@ class BuildHelperPlugin : Plugin<Project> {
     private fun Project.setupTestConfig() {
         val task = createTestConfigTask()
         // TODO depends on test tasks
-        tasks.findByName("compileTestKotlinJvm")?.dependsOn(task)
+        tasks.named("compileTestKotlinJvm") {
+            dependsOn(task)
+        }
 
         kotlinMultiplatformExtension.sourceSets.getByName("commonTest")
             .kotlin.srcDir("$buildDir/$TESTCONFIG_DIR")

@@ -36,7 +36,7 @@ import io.ktor.utils.io.readUTF8Line
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-class UpdateTest {
+class UpdateAndDestroyTest {
     private val consumerKeys = ConsumerKeys(
         key = TEST_CONSUMER_KEY,
         secret = TEST_CONSUMER_SECRET,
@@ -53,7 +53,7 @@ class UpdateTest {
     @Test
     fun test() = runTest {
         val twitter = Twitter {
-            this.consumerKeys = this@UpdateTest.consumerKeys
+            this.consumerKeys = this@UpdateAndDestroyTest.consumerKeys
             this.httpClientConfig = {
                 install(Logging) {
                     logger = Logger.SIMPLE
@@ -72,6 +72,17 @@ class UpdateTest {
                 val res = error.response.content.readUTF8Line()
                 println("res: $res")
             }
+            println(error)
+        }
+
+        val resultDelete = apiClient.statuses.destroy(result.getOrNull()?.idStr!!)
+        if (resultDelete.isFailure) {
+            val error = (resultDelete as ApiResult.Failure).error
+            if (error is ClientRequestException) {
+                val res = error.response.content.readUTF8Line()
+                println("res: $res")
+            }
+            println(error)
         }
     }
 }

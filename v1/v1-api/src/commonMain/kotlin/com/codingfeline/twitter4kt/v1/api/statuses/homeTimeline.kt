@@ -41,8 +41,8 @@ import io.ktor.http.Parameters
 @OptIn(Twitter4ktInternalAPI::class)
 public suspend fun StatusesApi.homeTimeline(
     count: Int? = null,
-    sinceId: Long? = null,
-    maxId: Long? = null,
+    sinceId: String? = null,
+    maxId: String? = null,
     excludeReplies: Boolean? = null,
     includeEntities: Boolean? = null
 ): ApiResult<List<Tweet>> {

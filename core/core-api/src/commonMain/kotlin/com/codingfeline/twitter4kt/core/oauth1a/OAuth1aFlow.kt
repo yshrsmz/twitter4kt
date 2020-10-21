@@ -47,8 +47,6 @@ public class OAuth1aFlow(
                 this.clock = Clock.System
             }
 
-            // TODO: move this to httpClientConfig
-
             this.apply(httpClientConfig)
         }
     }
