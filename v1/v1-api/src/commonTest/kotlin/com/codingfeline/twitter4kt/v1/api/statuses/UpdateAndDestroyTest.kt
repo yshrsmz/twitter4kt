@@ -21,9 +21,9 @@ import com.codingfeline.twitter4kt.TEST_ACCESS_TOKEN_SECRET
 import com.codingfeline.twitter4kt.TEST_CONSUMER_KEY
 import com.codingfeline.twitter4kt.TEST_CONSUMER_SECRET
 import com.codingfeline.twitter4kt.TEST_USER_ID
-import com.codingfeline.twitter4kt.core.ApiResult
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.Twitter
+import com.codingfeline.twitter4kt.core.isFailure
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.startSession
 import com.codingfeline.twitter4kt.v1.api.runTest
@@ -66,8 +66,8 @@ class UpdateAndDestroyTest {
         val result = apiClient.statuses.update(status = "Hello world from twitter4kt")
 
         println("result: $result")
-        if (result.isFailure) {
-            val error = (result as ApiResult.Failure).error
+        if (result.isFailure()) {
+            val error = result.error
             if (error is ClientRequestException) {
                 val res = error.response.content.readUTF8Line()
                 println("res: $res")
@@ -76,8 +76,8 @@ class UpdateAndDestroyTest {
         }
 
         val resultDelete = apiClient.statuses.destroy(result.getOrNull()?.idStr!!)
-        if (resultDelete.isFailure) {
-            val error = (resultDelete as ApiResult.Failure).error
+        if (resultDelete.isFailure()) {
+            val error = resultDelete.error
             if (error is ClientRequestException) {
                 val res = error.response.content.readUTF8Line()
                 println("res: $res")
