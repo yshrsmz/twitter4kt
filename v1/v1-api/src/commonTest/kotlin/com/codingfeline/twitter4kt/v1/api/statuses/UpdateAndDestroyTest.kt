@@ -21,9 +21,9 @@ import com.codingfeline.twitter4kt.TEST_ACCESS_TOKEN_SECRET
 import com.codingfeline.twitter4kt.TEST_CONSUMER_KEY
 import com.codingfeline.twitter4kt.TEST_CONSUMER_SECRET
 import com.codingfeline.twitter4kt.TEST_USER_ID
-import com.codingfeline.twitter4kt.core.ApiResult
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.Twitter
+import com.codingfeline.twitter4kt.core.isFailure
 import com.codingfeline.twitter4kt.core.model.oauth1a.AccessToken
 import com.codingfeline.twitter4kt.core.startSession
 import com.codingfeline.twitter4kt.v1.api.runTest
@@ -36,7 +36,7 @@ import io.ktor.utils.io.readUTF8Line
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-class UpdateTest {
+class UpdateAndDestroyTest {
     private val consumerKeys = ConsumerKeys(
         key = TEST_CONSUMER_KEY,
         secret = TEST_CONSUMER_SECRET,
@@ -53,7 +53,7 @@ class UpdateTest {
     @Test
     fun test() = runTest {
         val twitter = Twitter {
-            this.consumerKeys = this@UpdateTest.consumerKeys
+            this.consumerKeys = this@UpdateAndDestroyTest.consumerKeys
             this.httpClientConfig = {
                 install(Logging) {
                     logger = Logger.SIMPLE
@@ -66,12 +66,23 @@ class UpdateTest {
         val result = apiClient.statuses.update(status = "Hello world from twitter4kt")
 
         println("result: $result")
-        if (result.isFailure) {
-            val error = (result as ApiResult.Failure).error
+        if (result.isFailure()) {
+            val error = result.error
             if (error is ClientRequestException) {
                 val res = error.response.content.readUTF8Line()
                 println("res: $res")
             }
+            println(error)
+        }
+
+        val resultDelete = apiClient.statuses.destroy(result.getOrNull()?.idStr!!)
+        if (resultDelete.isFailure()) {
+            val error = resultDelete.error
+            if (error is ClientRequestException) {
+                val res = error.response.content.readUTF8Line()
+                println("res: $res")
+            }
+            println(error)
         }
     }
 }
