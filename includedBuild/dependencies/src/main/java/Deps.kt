@@ -2,8 +2,8 @@ object Versions {
     const val kotlin = "1.4.10"
     const val mavenPublish = "0.13.0"
     const val versions = "0.33.0"
-    const val gradle = "6.7-rc-4"
-    const val spotless = "5.6.1"
+    const val gradle = "6.7"
+    const val spotless = "5.7.0"
     const val ktlint = "0.39.0"
 
     const val ktor = "1.4.1"
