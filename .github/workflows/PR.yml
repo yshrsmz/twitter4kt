@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', 'includedeBuild/dependencies/src/java/Deps.kt') }}
 
       - name: Prepare secrets
-        run: echo $SECRETS | base64 -d > ./secret.properties
+        run: echo $SECRETS | base64 -d > ./secrets.properties
         env:
           SECRETS: ${{ secretS.SECRETS }}
 
