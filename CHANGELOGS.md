@@ -22,6 +22,7 @@ Types of changes
 - POST `statuses/destroy` ([#20](https://github.com/yshrsmz/twitter4kt/issues/20))
 - GET `statuses/home_timeline` ([#24](https://github.com/yshrsmz/twitter4kt/pull/24))
 - GET `statuses/user_timeline` ([#24](https://github.com/yshrsmz/twitter4kt/pull/24))
+- GET `favorites/list` ([#32](https://github.com/yshrsmz/twitter4kt/pull/32))
 - `ApiResult.isSuccess()` and `ApiResult.isFailure()` to use smart cast.
 
 ### Changed
