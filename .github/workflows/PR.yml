@@ -31,34 +31,34 @@ jobs:
         run: ./gradlew build
 
       - name: Slack Notification(Success)
-          if: success()
-          uses: tokorom/action-slack-incoming-webhook@master
-          env:
-            INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          with:
-            text: Build successfully finished
-            attachments: |
-              [
-                {
-                  "color": "good",
-                  "author_name": "${{ github.actor }}",
-                  "author_icon": "${{ github.event.sender.avatar_url }}",
-                  "fields": [
-                    {
-                      "title": "Commit Message",
-                      "value": "${{ env.COMMIT_MESSAGE }}"
-                    },
-                    {
-                      "title": "GitHub Actions URL",
-                      "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
-                    },
-                    {
-                      "title": "Compare URL",
-                      "value": "${{ github.event.compare }}"
-                    }
-                  ]
-                }
-              ]
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@master
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          text: Build successfully finished
+          attachments: |
+            [
+              {
+                "color": "good",
+                "author_name": "${{ github.actor }}",
+                "author_icon": "${{ github.event.sender.avatar_url }}",
+                "fields": [
+                  {
+                    "title": "Commit Message",
+                    "value": "${{ env.COMMIT_MESSAGE }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  },
+                  {
+                    "title": "Compare URL",
+                    "value": "${{ github.event.compare }}"
+                  }
+                ]
+              }
+            ]
 
       - name: Bundle the build report
         if: failure()
