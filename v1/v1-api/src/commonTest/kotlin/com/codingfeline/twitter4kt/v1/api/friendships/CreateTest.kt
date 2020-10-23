@@ -20,6 +20,7 @@ import com.codingfeline.twitter4kt.TEST_ACCESS_TOKEN
 import com.codingfeline.twitter4kt.TEST_ACCESS_TOKEN_SECRET
 import com.codingfeline.twitter4kt.TEST_CONSUMER_KEY
 import com.codingfeline.twitter4kt.TEST_CONSUMER_SECRET
+import com.codingfeline.twitter4kt.TEST_SCREEN_NAME
 import com.codingfeline.twitter4kt.TEST_USER_ID
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.Twitter
@@ -46,7 +47,7 @@ class CreateTest {
         token = TEST_ACCESS_TOKEN,
         secret = TEST_ACCESS_TOKEN_SECRET,
         userId = TEST_USER_ID,
-        screenName = TEST_USER_ID
+        screenName = TEST_SCREEN_NAME
     )
 
     @Ignore

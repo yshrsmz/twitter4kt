@@ -40,24 +40,8 @@ private const val KEY_ERRORS = "errors"
 @OptIn(Twitter4ktInternalAPI::class)
 internal suspend inline fun <reified T> ExtendableApiClient.getInternal(url: Url): ApiResult<T> {
     return try {
-        val result = httpClient.get<JsonObject>(url)
-        if (result.containsKey(KEY_ERRORS)) {
-            ApiResult.failure(TwitterError.fromJsonObject(json, result).asException())
-        } else {
-            ApiResult.success(json.decodeFromJsonElement(result))
-        }
-    } catch (e: ClientRequestException) {
-        ApiResult.failure(e.asTwitterApiException(json) ?: e)
-    } catch (e: Exception) {
-        ApiResult.failure(e)
-    }
-}
-
-@OptIn(Twitter4ktInternalAPI::class)
-internal suspend inline fun <reified T> ExtendableApiClient.getInternalListResponse(url: Url): ApiResult<List<T>> {
-    return try {
-        val response = httpClient.get<List<T>>(url)
-        ApiResult.success(response)
+        val result = httpClient.get<T>(url)
+        ApiResult.success(result)
     } catch (e: ClientRequestException) {
         ApiResult.failure(e.asTwitterApiException(json) ?: e)
     } catch (e: Exception) {
