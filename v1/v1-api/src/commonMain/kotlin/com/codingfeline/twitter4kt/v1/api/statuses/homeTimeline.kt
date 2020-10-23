@@ -20,7 +20,7 @@ import com.codingfeline.twitter4kt.core.ApiResult
 import com.codingfeline.twitter4kt.core.apiUrl
 import com.codingfeline.twitter4kt.core.util.Twitter4ktInternalAPI
 import com.codingfeline.twitter4kt.core.util.appendNotNulls
-import com.codingfeline.twitter4kt.v1.api.getInternalListResponse
+import com.codingfeline.twitter4kt.v1.api.getInternal
 import com.codingfeline.twitter4kt.v1.model.status.Tweet
 import io.ktor.http.Parameters
 
@@ -57,5 +57,5 @@ public suspend fun StatusesApi.homeTimeline(
         )
     }
     val url = apiUrl("1.1/statuses/home_timeline.json", parameters = parameters)
-    return apiClient.getInternalListResponse<Tweet>(url.build())
+    return apiClient.getInternal(url.build())
 }
