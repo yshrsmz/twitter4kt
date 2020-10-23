@@ -26,7 +26,7 @@ import io.ktor.http.Parameters
 
 /**
  * Get's a non-protected user's timeline of their tweets/retweets. This can be requested either using their Twitter ID
- * or by using their screenname. One must be passed in for the call to succeed. This will return the full 280 characters
+ * or by using their screen name. One must be passed in for the call to succeed. This will return the full 280 characters
  * of a tweet in the fullText field rather than the text field
  *
  * This is rate limited both at the user and application-wide level

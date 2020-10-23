@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package com.codingfeline.twitter4kt.v1.api.statuses
+package com.codingfeline.twitter4kt.v1.api.favorites
 
 import com.codingfeline.twitter4kt.TEST_ACCESS_TOKEN
 import com.codingfeline.twitter4kt.TEST_ACCESS_TOKEN_SECRET
@@ -36,7 +36,7 @@ import io.ktor.utils.io.readUTF8Line
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-class LikesTest {
+class ListTest {
     private val consumerKeys = ConsumerKeys(
         key = TEST_CONSUMER_KEY,
         secret = TEST_CONSUMER_SECRET,
@@ -53,7 +53,7 @@ class LikesTest {
     @Test
     fun test() = runTest {
         val twitter = Twitter {
-            this.consumerKeys = this@LikesTest.consumerKeys
+            this.consumerKeys = this@ListTest.consumerKeys
             this.httpClientConfig = {
                 install(Logging) {
                     logger = Logger.SIMPLE
@@ -63,7 +63,7 @@ class LikesTest {
         }
 
         val apiClient = twitter.startSession(accessToken)
-        val result = apiClient.statuses.likes()
+        val result = apiClient.favorites.list()
 
         println("result: $result")
         if (result.isFailure()) {

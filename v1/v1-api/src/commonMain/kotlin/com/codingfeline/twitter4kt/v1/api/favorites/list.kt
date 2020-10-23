@@ -1,20 +1,4 @@
-/**
- * Copyright 2020 Shimizu Yasuhiro (yshrsmz)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-package com.codingfeline.twitter4kt.v1.api.statuses
+package com.codingfeline.twitter4kt.v1.api.favorites
 
 import com.codingfeline.twitter4kt.core.ApiResult
 import com.codingfeline.twitter4kt.core.apiUrl
@@ -26,7 +10,7 @@ import io.ktor.http.Parameters
 
 /**
  * Get's a non-protected user's timeline of their likes (previously favorites). This can be requested either using their Twitter ID
- * or by using their screenname. One must be passed in for the call to succeed. This will return the full 280 characters
+ * or by using their screen name. One must be passed in for the call to succeed. This will return the full 280 characters
  * of a tweet in the fullText field rather than the text field. If no userId or screenName is provided it returns the
  * authenticated user's likes.
  *
@@ -42,7 +26,7 @@ import io.ktor.http.Parameters
  * @param includeEntities The entities node will not be included when set to false.
  */
 @OptIn(Twitter4ktInternalAPI::class)
-public suspend fun StatusesApi.likes(
+public suspend fun FavoritesApi.list(
     userId: String? = null,
     screenName: String? = null,
     count: Int? = null,
