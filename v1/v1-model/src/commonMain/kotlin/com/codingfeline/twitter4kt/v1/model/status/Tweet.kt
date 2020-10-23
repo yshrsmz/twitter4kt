@@ -47,7 +47,7 @@ public data class Tweet(
     @SerialName("reply_count") val replyCount: Int? = null,
     @SerialName("retweet_count") val retweetCount: Int,
     @SerialName("favorite_count") val favoriteCount: Int,
-    @SerialName("entities") val entities: Entities,
+    @SerialName("entities") val entities: Entities? = null,
     @SerialName("extended_entities") val extendedEntities: ExtendedEntities? = null,
     @SerialName("favorited") val favorited: Boolean,
     @SerialName("retweeted") val retweeted: Boolean,
