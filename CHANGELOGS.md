@@ -17,6 +17,11 @@ Types of changes
 
 ## [unreleased]
 
+TBD
+
+
+## [v0.2.0] - 2020-10-24
+
 ### Added
 
 - POST `statuses/destroy` ([#20](https://github.com/yshrsmz/twitter4kt/issues/20))
