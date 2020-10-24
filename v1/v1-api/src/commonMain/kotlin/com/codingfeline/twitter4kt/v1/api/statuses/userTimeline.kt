@@ -49,7 +49,7 @@ public suspend fun StatusesApi.userTimeline(
     maxId: String? = null,
     excludeReplies: Boolean? = null,
     includeEntities: Boolean? = null,
-    includeRts: Boolean? = null
+    includeRts: Boolean? = null,
 ): ApiResult<List<Tweet>> {
     val parameters = Parameters.build {
         appendNotNulls(
@@ -61,7 +61,6 @@ public suspend fun StatusesApi.userTimeline(
             "exclude_replies" to excludeReplies,
             "include_entities" to includeEntities,
             "include_rts" to includeRts,
-            "tweet_mode" to "extended"
         )
     }
     val url = apiUrl("1.1/statuses/user_timeline.json", parameters = parameters)

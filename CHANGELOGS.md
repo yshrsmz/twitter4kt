@@ -27,7 +27,7 @@ Types of changes
 
 ### Changed
 
-- `tweet_mode=extended` is now forced
+- `tweet_mode=extended` is now forced ([#31](https://github.com/yshrsmz/twitter4kt/pull/31))
 
 
 ## [0.1.4] - 2020-10-10

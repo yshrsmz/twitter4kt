@@ -44,7 +44,7 @@ public suspend fun StatusesApi.homeTimeline(
     sinceId: String? = null,
     maxId: String? = null,
     excludeReplies: Boolean? = null,
-    includeEntities: Boolean? = null
+    includeEntities: Boolean? = null,
 ): ApiResult<List<Tweet>> {
     val parameters = Parameters.build {
         appendNotNulls(
@@ -53,7 +53,6 @@ public suspend fun StatusesApi.homeTimeline(
             "max_id" to maxId,
             "exclude_replies" to excludeReplies,
             "include_entities" to includeEntities,
-            "tweet_mode" to "extended"
         )
     }
     val url = apiUrl("1.1/statuses/home_timeline.json", parameters = parameters)

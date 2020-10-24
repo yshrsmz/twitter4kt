@@ -68,7 +68,7 @@ public suspend fun StatusesApi.update(
     trimUser: Boolean? = null,
     enableDMCommands: Boolean? = null,
     failDMCommands: Boolean? = null,
-    cardUri: String? = null
+    cardUri: String? = null,
 ): ApiResult<Tweet> {
     val url = apiUrl("1.1/statuses/update.json").build()
     val body = Parameters.build {
@@ -88,7 +88,6 @@ public suspend fun StatusesApi.update(
             "enable_dmcommands" to enableDMCommands,
             "fail_dmcommands" to failDMCommands,
             "card_uri" to cardUri,
-            "tweet_mode" to "extended"
         )
     }
     return apiClient.postInternal(url, body)

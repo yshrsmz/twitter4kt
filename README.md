@@ -57,7 +57,7 @@ val twitter = Twitter {
 
 val authFlow = twitter.launchOAuthFlow()
 
-val accessToken = launch(Dispatchers.io) {
+launch(Dispatchers.io) {
     val requestToken: RequestToken = authFlow.fetchRequestToken()
  
     val url = requestToken.authorizationUrl
@@ -66,12 +66,11 @@ val accessToken = launch(Dispatchers.io) {
     val accessToken = authFlow.fetchAccessToken(requestToken, pinCode)
 
     authFlow.destroy()
-    accessToken
+
+    val client = twitter.startSession(accessToken)
+    
+    val result: ApiResult<Tweet> = client.statuses.update(status = "Hello from twitter4kt!")
 }
-
-val client = twitter.startSession(accessToken)
-
-val result: ApiResult<Tweet> = client.statuses.update(status = "Hello from twitter4kt!")
 ```
 
 

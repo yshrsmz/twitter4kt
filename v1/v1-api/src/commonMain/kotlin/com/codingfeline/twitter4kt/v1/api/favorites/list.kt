@@ -58,7 +58,6 @@ public suspend fun FavoritesApi.list(
             "since_id" to sinceId,
             "max_id" to maxId,
             "include_entities" to includeEntities,
-            "tweet_mode" to "extended"
         )
     }
     val url = apiUrl("1.1/favorites/list.json", parameters = parameters)
