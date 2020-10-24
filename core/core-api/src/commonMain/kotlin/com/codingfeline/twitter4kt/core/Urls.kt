@@ -23,8 +23,13 @@ internal object Urls {
     const val API_ENDPOINT: String = "https://api.twitter.com"
 }
 
-public fun apiUrl(path: String, baseUrl: String = Urls.API_ENDPOINT, parameters: Parameters = Parameters.build {}): URLBuilder {
+public fun apiUrl(
+    path: String,
+    baseUrl: String = Urls.API_ENDPOINT,
+    parameters: Parameters = Parameters.build {},
+): URLBuilder {
     val builder = URLBuilder(urlString = baseUrl).path(path)
     builder.parameters.appendAll(parameters)
+    builder.parameters.appendMissing("tweet_mode", listOf("extended"))
     return builder
 }

@@ -34,7 +34,6 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.utils.io.readUTF8Line
-import kotlin.test.Ignore
 import kotlin.test.Test
 
 class UpdateAndDestroyTest {
@@ -50,7 +49,7 @@ class UpdateAndDestroyTest {
         screenName = TEST_SCREEN_NAME,
     )
 
-    @Ignore
+    //    @Ignore
     @Test
     fun test() = runTest {
         val twitter = Twitter {
