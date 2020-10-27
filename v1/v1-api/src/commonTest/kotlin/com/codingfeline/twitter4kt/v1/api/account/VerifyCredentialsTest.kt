@@ -62,7 +62,11 @@ class VerifyCredentialsTest {
         }
 
         val apiClient = twitter.startSession(accessToken)
-        val result = apiClient.account.verifyCredentials()
+        val result = apiClient.account.verifyCredentials(
+            includeEmail = false,
+            includeEntities = false,
+            skipStatus = true,
+        )
 
         println("result: $result")
     }
