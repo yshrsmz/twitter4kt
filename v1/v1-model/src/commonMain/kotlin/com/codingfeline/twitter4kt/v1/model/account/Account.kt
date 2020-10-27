@@ -41,5 +41,5 @@ public data class Account(
     @SerialName("profile_image_url_https") val profileImageUrlHttps: String,
     @SerialName("default_profile") val defaultProfile: Boolean,
     @SerialName("default_profile_image") val defaultProfileImage: Boolean,
-    @SerialName("status") val status: Tweet?,
+    @SerialName("status") val status: Tweet? = null,
 )

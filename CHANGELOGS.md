@@ -17,7 +17,9 @@ Types of changes
 
 ## [unreleased]
 
-TBD
+### Fixed
+
+- `verifyCredentials` fails if skip_status=true ([#40](https://github.com/yshrsmz/twitter4kt/issues/40))
 
 
 ## [v0.2.0] - 2020-10-24
