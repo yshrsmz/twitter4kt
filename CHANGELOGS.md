@@ -17,6 +17,10 @@ Types of changes
 
 ## [unreleased]
 
+### Changed
+
+- Updated to kotlinx.coroutines 1.4.0
+
 ### Fixed
 
 - `verifyCredentials` fails if skip_status=true ([#40](https://github.com/yshrsmz/twitter4kt/issues/40))

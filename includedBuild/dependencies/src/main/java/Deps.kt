@@ -21,7 +21,7 @@ object Plugins {
 
 object PluginDeps {
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.kotlin}"
+    const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.4.10.2"
     const val mavenPublish = "com.vanniktech:gradle-maven-publish-plugin:0.13.0"
 }
 
@@ -37,7 +37,7 @@ object Deps {
 
     object Kotlin {
         const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0"
         const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.0"
 
         object Test {
