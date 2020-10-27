@@ -9,7 +9,7 @@ Currently, only available for jvm.
 
 ### For build.gradle.kts
 
-LATEST_VERSION: `0.2.0`
+LATEST_VERSION: `0.2.1`
 
 ```kotlin
 plugins {

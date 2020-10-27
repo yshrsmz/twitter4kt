@@ -17,6 +17,10 @@ Types of changes
 
 ## [unreleased]
 
+TBD
+
+## [v0.2.1] - 2020-10-27
+
 ### Changed
 
 - Updated to kotlinx.coroutines 1.4.0
