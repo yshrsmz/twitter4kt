@@ -1,12 +1,13 @@
 object Versions {
-    const val kotlin = "1.4.10"
+    const val kotlin = "1.4.20"
     const val mavenPublish = "0.13.0"
-    const val versions = "0.33.0"
-    const val gradle = "6.7"
-    const val spotless = "5.7.0"
+    const val versions = "0.36.0"
+    const val gradle = "6.7.1"
+    const val spotless = "5.8.2"
     const val ktlint = "0.39.0"
+    const val dokka = "1.4.10.2"
 
-    const val ktor = "1.4.1"
+    const val ktor = "1.4.2"
 }
 
 object Plugins {
@@ -36,9 +37,9 @@ object Deps {
     }
 
     object Kotlin {
-        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0"
-        const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.0"
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+        const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.1"
 
         object Test {
             const val common = "test-common"

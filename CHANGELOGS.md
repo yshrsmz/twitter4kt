@@ -17,7 +17,13 @@ Types of changes
 
 ## [unreleased]
 
-TBD
+### Changed
+
+- Updated to kotlin 1.4.20
+- Updated to kotlinx.coroutines 1.4.2
+- Updated to kotlinx.serialization 1.0.1
+- Updated to kotlinx.datetime 1.0.1
+- Updated to ktor 1.4.2
 
 ## [v0.2.1] - 2020-10-27
 
