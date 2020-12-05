@@ -5,9 +5,9 @@ object Versions {
     const val gradle = "6.7.1"
     const val spotless = "5.8.2"
     const val ktlint = "0.39.0"
-    const val dokka = "1.4.10.2"
+    const val dokka = "1.4.20"
 
-    const val ktor = "1.4.2"
+    const val ktor = "1.4.3"
 }
 
 object Plugins {

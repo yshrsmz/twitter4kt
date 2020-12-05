@@ -2,8 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!--
 Types of changes
@@ -15,7 +14,7 @@ Types of changes
 - Security in case of vulnerabilities.
 -->
 
-## [unreleased]
+## [v0.2.2] - 2020-12-05
 
 ### Changed
 
@@ -24,7 +23,7 @@ Types of changes
 - Updated to kotlinx.coroutines 1.4.2
 - Updated to kotlinx.serialization 1.0.1
 - Updated to kotlinx.datetime 1.0.1
-- Updated to ktor 1.4.2
+- Updated to ktor 1.4.3
 
 ## [v0.2.1] - 2020-10-27
 
@@ -35,7 +34,6 @@ Types of changes
 ### Fixed
 
 - `verifyCredentials` fails if skip_status=true ([#40](https://github.com/yshrsmz/twitter4kt/issues/40))
-
 
 ## [v0.2.0] - 2020-10-24
 
@@ -51,7 +49,6 @@ Types of changes
 
 - `tweet_mode=extended` is now forced ([#31](https://github.com/yshrsmz/twitter4kt/pull/31))
 
-
 ## [0.1.4] - 2020-10-10
 
 ### Added
@@ -62,20 +59,17 @@ Types of changes
 
 - `ApiResult` is now a part of `core-api` artifact
 
-
 ## [0.1.3] - 2020-10-10
 
 ### Changed
 
 - Updated to kotlinx.serialization 1.0.0
 
-
 ## [0.1.2] - 2020-10-06
 
 ### Fixed
 
 - No jar published
-
 
 ## [0.1.1] - 2020-10-04
 
@@ -84,7 +78,7 @@ Types of changes
 - `ApiResult.fold(onSuccess, onFailure)` extension function
 - Explicit API Mode is enabled
 
-### Changed 
+### Changed
 
 - `ApiResult` class is now a part of `core-model` artifact
 - Functions in `OAuth1aFlow` now return `ApiResult`
@@ -93,7 +87,6 @@ Types of changes
 
 - Error handling in oauth1a flow ([#15](https://github.com/yshrsmz/twitter4kt/issues/15))
 - Remove `ktor-client-logging` dependency.
-
 
 ## [0.1.0] - 2020-10-04
 

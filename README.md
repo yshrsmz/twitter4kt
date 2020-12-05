@@ -9,11 +9,11 @@ Currently, only available for jvm.
 
 ### For build.gradle.kts
 
-LATEST_VERSION: `0.2.1`
+LATEST_VERSION: `0.2.2`
 
 ```kotlin
 plugins {
-  id("org.jetbrains.kotlin.multiplatform") version "1.4.10"
+    id("org.jetbrains.kotlin.multiplatform") version "1.4.10"
 }
 
 repositories {
@@ -38,7 +38,6 @@ kotlin {
 }
 ```
 
-
 ## Usage
 
 ```kotlin
@@ -59,7 +58,7 @@ val authFlow = twitter.launchOAuthFlow()
 
 launch(Dispatchers.io) {
     val requestToken: RequestToken = authFlow.fetchRequestToken()
- 
+
     val url = requestToken.authorizationUrl
     val pinCode = ""
 
@@ -68,11 +67,10 @@ launch(Dispatchers.io) {
     authFlow.destroy()
 
     val client = twitter.startSession(accessToken)
-    
+
     val result: ApiResult<Tweet> = client.statuses.update(status = "Hello from twitter4kt!")
 }
 ```
-
 
 ## Development
 
