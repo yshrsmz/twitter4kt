@@ -19,6 +19,7 @@ Types of changes
 
 ### Changed
 
+- userId & screenName fields of AccessToken is now optional [#39](https://github.com/yshrsmz/twitter4kt/issues/39)
 - Updated to kotlin 1.4.20
 - Updated to kotlinx.coroutines 1.4.2
 - Updated to kotlinx.serialization 1.0.1
