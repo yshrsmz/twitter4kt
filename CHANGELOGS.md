@@ -19,6 +19,7 @@ Types of changes
 ### Added
 
 - `TwitterError.rawCode`
+- proguard rules for Android
 
 ### Changed
 
