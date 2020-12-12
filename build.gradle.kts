@@ -1,11 +1,11 @@
 plugins {
-    id("dependencies")
     id("build-helper")
     id(Plugins.versions) version Versions.versions
     id(Plugins.spotless) version Versions.spotless
-    id(Plugins.dokka) version Versions.dokka apply false
-    id(Plugins.multiplatform) version Versions.kotlin apply false
+
+    id(Plugins.multiplatform) apply false
     id(Plugins.serialization) version Versions.kotlin apply false
+    id(Plugins.dokka) apply false
 }
 
 val GROUP: String by project

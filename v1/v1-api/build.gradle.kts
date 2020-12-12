@@ -33,33 +33,33 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Deps.Kotlin.serialization)
-                implementation(Deps.Kotlin.coroutines)
-                implementation(Deps.Kotlin.datetime)
-                implementation(Deps.Ktor.core)
-                implementation(Deps.Ktor.json)
-                implementation(Deps.Ktor.serialization)
+                implementation(KotlinDeps.serialization)
+                implementation(KotlinDeps.coroutines)
+                implementation(KotlinDeps.datetime)
+                implementation(KtorDeps.core)
+                implementation(KtorDeps.json)
+                implementation(KtorDeps.serialization)
 
-                api(project(Deps.Twitter4kt.coreApi))
-                api(project(Deps.Twitter4kt.v1Model))
+                api(project(Twitter4ktDeps.coreApi))
+                api(project(Twitter4ktDeps.v1Model))
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin(Deps.Kotlin.Test.common))
-                implementation(kotlin(Deps.Kotlin.Test.annotations))
+                implementation(kotlin(KotlinTestDeps.common))
+                implementation(kotlin(KotlinTestDeps.annotations))
 
-                implementation(Deps.Ktor.logging)
+                implementation(KtorDeps.logging)
             }
         }
         val jvmMain by getting {
             dependencies {
-                implementation(Deps.Ktor.okhttp)
+                implementation(KtorDeps.okhttp)
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation(kotlin(Deps.Kotlin.Test.junit))
+                implementation(kotlin(KotlinTestDeps.junit))
             }
         }
         /*
