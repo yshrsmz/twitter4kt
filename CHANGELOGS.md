@@ -14,6 +14,17 @@ Types of changes
 - Security in case of vulnerabilities.
 -->
 
+## [Unreleased]
+
+### Added
+
+- `TwitterError.rawCode`
+
+### Changed
+
+- `TwitterError.code` is now `TwitterError.Code` enum
+
+
 ## [v0.2.2] - 2020-12-05
 
 ### Changed

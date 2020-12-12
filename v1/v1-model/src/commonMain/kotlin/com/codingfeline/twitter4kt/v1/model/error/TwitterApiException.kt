@@ -16,9 +16,18 @@
  */
 package com.codingfeline.twitter4kt.v1.model.error
 
+@Suppress("MemberVisibilityCanBePrivate")
 public class TwitterApiException(
-    public val errors: List<TwitterError>
+    public val errors: List<TwitterError>,
 ) : Exception() {
+
+    /**
+     * Check if this exception contains [TwitterError.Code]
+     */
+    public fun contains(code: TwitterError.Code): Boolean {
+        return errors.any { it.rawCode == code.value }
+    }
+
     override fun toString(): String {
         return "TwitterApiException(errors=$errors)"
     }
