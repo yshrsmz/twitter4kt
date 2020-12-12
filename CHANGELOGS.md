@@ -16,6 +16,8 @@ Types of changes
 
 ## [Unreleased]
 
+## [v0.2.3] - 2020-12-12
+
 ### Added
 
 - `TwitterError.rawCode`
