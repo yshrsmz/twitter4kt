@@ -37,7 +37,7 @@ spotless {
             "**/gen/**/*.*",
             "**/generated/**/*.*",
             "**/testconfig/**/*.*",
-            "includedBuild/dependencies/src/main/java/Deps.kt"
+            "buildSrc/src/main/kotlin/Dsl.kt"
         )
         ktlint(Versions.ktlint)
         trimTrailingWhitespace()

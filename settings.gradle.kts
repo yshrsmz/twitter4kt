@@ -7,11 +7,6 @@ pluginManagement {
         maven("https://dl.bintray.com/jetbrains/kotlin-native-dependencies")
         maven("https://dl.bintray.com/kotlin/kotlin-eap")
     }
-    resolutionStrategy {
-        eachPlugin {
-            println("${requested.id.id}:${requested.version}")
-        }
-    }
 }
 rootProject.name = "twitter4kt"
 
