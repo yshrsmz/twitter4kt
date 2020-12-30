@@ -34,13 +34,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(KotlinDeps.serialization)
+                implementation(Dependencies.Kotlin.serialization)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin(KotlinTestDeps.common))
-                implementation(kotlin(KotlinTestDeps.annotations))
+                implementation(kotlin(Dependencies.Kotlin.Test.common))
+                implementation(kotlin(Dependencies.Kotlin.Test.annotations))
             }
         }
         val jvmMain by getting {
@@ -49,7 +49,7 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
-                implementation(kotlin(KotlinTestDeps.junit))
+                implementation(kotlin(Dependencies.Kotlin.Test.junit))
             }
         }
         /*

@@ -1,6 +1,7 @@
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
+    `kotlin-dsl-precompiled-script-plugins`
 }
 
 repositories {
@@ -9,9 +10,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21")
-    implementation("com.vanniktech:gradle-maven-publish-plugin:0.13.0")
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.4.20")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
+    implementation("com.vanniktech:gradle-maven-publish-plugin:${Versions.mavenPublish}")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}")
 }
 
 gradlePlugin {
@@ -21,4 +22,9 @@ gradlePlugin {
             implementationClass = "com.codingfeline.twitter4kt.buildhelper.BuildHelperPlugin"
         }
     }
+}
+
+kotlin {
+    // Add Deps to compilation, so it will become available in main project
+    sourceSets.getByName("main").kotlin.srcDir("buildSrc/src/main/kotlin")
 }
