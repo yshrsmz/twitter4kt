@@ -10,6 +10,7 @@ Currently, only available for jvm.
 ### For build.gradle.kts
 
 LATEST_VERSION: `0.2.3`
+Twitter4kt is distributed via Maven Central
 
 ```kotlin
 plugins {
@@ -20,7 +21,6 @@ repositories {
     mavenCentral()
     jcenter()
     maven(url = "https://kotlin.bintray.com/kotlinx/") // needed for kotlinx-datetime
-    maven(url = "https://dl.bintray.com/yshrsmz/twitter4kt")
 }
 
 kotlin {

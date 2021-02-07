@@ -57,3 +57,5 @@ secrets.properties
 !.idea/codeStyles/
 !.idea/dictionaries/dic.xml
 !.idea/saveactions_settings.xml
+
+*-sec.asc

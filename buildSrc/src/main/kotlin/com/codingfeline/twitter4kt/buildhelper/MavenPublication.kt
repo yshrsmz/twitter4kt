@@ -19,6 +19,7 @@ package com.codingfeline.twitter4kt.buildhelper
 import com.vanniktech.maven.publish.MavenPublishPlugin
 import com.vanniktech.maven.publish.MavenPublishPluginExtension
 import org.gradle.api.Project
+import org.gradle.plugins.signing.SigningExtension
 import org.jetbrains.dokka.gradle.DokkaPlugin
 
 internal fun Project.configureMavenPublications() {
@@ -27,11 +28,10 @@ internal fun Project.configureMavenPublications() {
         apply(DokkaPlugin::class.java)
     }
     val extension = extensions.getByType(MavenPublishPluginExtension::class.java)
-    extension.releaseSigningEnabled = false
+
+    extension.releaseSigningEnabled = getGpgKey().isNotEmpty() && getGpgKeyPassword().isNotEmpty()
+
     extension.targets.apply {
-        maybeCreate("uploadArchives").apply {
-            releaseRepositoryUrl = bintrayReleaseRepositoryUrl
-        }
         maybeCreate("testMaven").apply {
             releaseRepositoryUrl = file("${rootProject.buildDir}/localMaven").toURI().toString()
             snapshotRepositoryUrl = file("${rootProject.buildDir}/localMaven").toURI().toString()
@@ -39,12 +39,22 @@ internal fun Project.configureMavenPublications() {
             repositoryPassword = null
         }
     }
+
+    val signingExtension = extensions.getByType(SigningExtension::class.java)
+    signingExtension.apply {
+        val signingKey = getGpgKey()
+        val password = getGpgKeyPassword()
+
+        if (signingKey.isNotEmpty() && password.isNotEmpty()) {
+            useInMemoryPgpKeys(signingKey, password)
+        }
+    }
 }
 
-private val Project.bintrayReleaseRepositoryUrl: String
-    get() {
-        val bintrayOrg = requireNotNull(findProperty("BINTRAY_ORG") as String?) { "BINTRAY_ORG" }
-        val bintrayRepository = requireNotNull(findProperty("BINTRAY_REPOSITORY") as String?) { "BINTRAY_REPOSITORY" }
-        val pomArtifactId = requireNotNull(findProperty("POM_ARTIFACT_ID") as String?) { "POM_ARTIFACT_ID" }
-        return "https://api.bintray.com/maven/$bintrayOrg/$bintrayRepository/$pomArtifactId"
-    }
+fun Project.getGpgKey(): String {
+    return findProperty("signingKey") as String? ?: ""
+}
+
+fun Project.getGpgKeyPassword(): String {
+    return findProperty("signingKeyPassword") as String? ?: ""
+}
