@@ -15,7 +15,6 @@ kotlin {
             dependencies {
                 implementation(kotlin(Dependencies.Kotlin.Test.common))
                 implementation(kotlin(Dependencies.Kotlin.Test.annotations))
-
             }
         }
         val jvmMain by getting {
