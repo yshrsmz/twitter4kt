@@ -24,6 +24,7 @@ import io.ktor.http.Url
 import io.ktor.http.encodeOAuth
 import io.ktor.http.encodeURLParameter
 import io.ktor.http.parametersOf
+import okio.ByteString.Companion.encodeUtf8
 
 internal fun createSignature(
     method: HttpMethod,
@@ -59,4 +60,6 @@ internal fun createSignature(
     return hmacSha1(signingKey, baseString)
 }
 
-internal expect fun hmacSha1(key: String, text: String): String
+internal fun hmacSha1(key: String, text: String): String {
+    return text.encodeUtf8().hmacSha1(key.encodeUtf8()).base64().encodeOAuth()
+}

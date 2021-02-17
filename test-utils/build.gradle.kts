@@ -4,31 +4,6 @@ plugins {
 
 kotlin {
     jvm()
-    /*
-    js {
-        browser {
-            testTask {
-                useKarma {
-                    useChromeHeadless()
-                    webpackConfig.cssSupport.enabled = true
-                }
-            }
-        }
-    }
-    val hostOs = System.getProperty("os.name")
-    val isMacOs = hostOs == "Mac OS X"
-    val isMingwX64 = hostOs.startsWith("Windows")
-    val nativeTarget = when {
-        isMacOs -> macosX64("native")
-        hostOs == "Linux" -> linuxX64("native")
-        isMingwX64 -> mingwX64("native")
-        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
-    }
-
-    if (isMacOs) {
-        ios()
-    }
-    */
 
     sourceSets {
         val commonMain by getting {
@@ -50,8 +25,6 @@ kotlin {
                 implementation(kotlin(Dependencies.Kotlin.Test.annotations))
 
                 implementation(Dependencies.Ktor.logging)
-
-                implementation(project(Dependencies.Twitter4kt.testUtils))
             }
         }
         val jvmMain by getting {
@@ -64,15 +37,5 @@ kotlin {
                 implementation(kotlin(Dependencies.Kotlin.Test.junit))
             }
         }
-        /*
-        val jsMain by getting
-        val jsTest by getting {
-            dependencies {
-                implementation(kotlin("test-js"))
-            }
-        }
-        val nativeMain by getting
-        val nativeTest by getting
-         */
     }
 }

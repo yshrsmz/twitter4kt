@@ -14,5 +14,6 @@ include(
     ":core:core-model",
     ":core:core-api",
     ":v1:v1-api",
-    ":v1:v1-model"
+    ":v1:v1-model",
+    ":test-utils"
 )
