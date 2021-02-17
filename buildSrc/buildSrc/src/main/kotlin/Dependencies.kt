@@ -1,14 +1,14 @@
 object Versions {
-    const val kotlin = "1.4.21"
+    const val kotlin = "1.4.30"
 
     const val mavenPublish = "0.13.0"
     const val versions = "0.36.0"
-    const val gradle = "6.8-rc-1"
+    const val gradle = "6.8.2"
     const val spotless = "5.8.2"
     const val ktlint = "0.39.0"
     const val dokka = "1.4.20"
 
-    const val ktor = "1.4.3"
+    const val ktor = "1.5.1"
 }
 
 object Plugins {
@@ -28,6 +28,8 @@ object Dependencies {
 
         const val v1Api = ":v1:v1-api"
         const val v1Model = ":v1:v1-model"
+
+        const val testUtils = ":test-utils"
     }
 
     public object Kotlin {
@@ -49,4 +51,6 @@ object Dependencies {
         const val logging = "io.ktor:ktor-client-logging:${Versions.ktor}"
         const val okhttp = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
     }
+
+    const val okio = "com.squareup.okio:okio:2.10.0"
 }

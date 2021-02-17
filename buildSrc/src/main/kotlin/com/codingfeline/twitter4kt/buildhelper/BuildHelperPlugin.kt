@@ -34,7 +34,8 @@ import java.util.Properties
 private const val TESTCONFIG_DIR = "testconfig"
 
 class BuildHelperPlugin : Plugin<Project> {
-    private val ignoreModules = listOf(":core", ":v1")
+    private val nonModules = listOf(":core", ":v1")
+    private val unpublishableModules = listOf(":test-utils")
 
     private var _secrets: Properties? = null
 
@@ -43,13 +44,15 @@ class BuildHelperPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         project.subprojects {
-            if (ignoreModules.contains(path)) return@subprojects
+            if (nonModules.contains(path)) return@subprojects
 
             afterEvaluate {
                 configureKotlin()
                 configureApiModules()
             }
-            configureMavenPublications()
+            if (!unpublishableModules.contains(path)) {
+                configureMavenPublications()
+            }
         }
     }
 

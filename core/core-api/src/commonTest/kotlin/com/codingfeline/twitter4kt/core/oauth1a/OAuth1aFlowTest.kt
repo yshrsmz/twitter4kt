@@ -20,13 +20,13 @@ import com.codingfeline.twitter4kt.TEST_CONSUMER_KEY
 import com.codingfeline.twitter4kt.TEST_CONSUMER_SECRET
 import com.codingfeline.twitter4kt.core.ConsumerKeys
 import com.codingfeline.twitter4kt.core.fold
+import com.codingfeline.twitter4kt.testutils.suspendTest
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
-import kotlinx.coroutines.runBlocking
-import org.junit.Ignore
-import org.junit.Test
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 class OAuth1aFlowTest {
 
@@ -37,7 +37,7 @@ class OAuth1aFlowTest {
 
     @Ignore
     @Test
-    fun requestToken() = runBlocking {
+    fun requestToken() = suspendTest {
         val flow = OAuth1aFlow(
             consumerKeys = consumerKeys,
             oAuthConfig = OAuthConfig(callback = "oob"),
@@ -63,7 +63,7 @@ class OAuth1aFlowTest {
 
     @Ignore
     @Test
-    fun accessToken() = runBlocking {
+    fun accessToken() = suspendTest {
         val flow = OAuth1aFlow(
             consumerKeys = consumerKeys,
             oAuthConfig = OAuthConfig(callback = "oob"),

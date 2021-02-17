@@ -14,21 +14,9 @@
  * limitations under the License.
  *
  */
-package com.codingfeline.twitter4kt.core.oauth1a
+package com.codingfeline.twitter4kt.testutils
 
-import io.ktor.http.encodeOAuth
-import io.ktor.util.InternalAPI
-import io.ktor.util.encodeBase64
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.runBlocking
 
-private const val ALGORITHM_HMAC_SHA1 = "HmacSHA1"
-
-@OptIn(InternalAPI::class)
-internal actual fun hmacSha1(key: String, text: String): String {
-    val keySpec = SecretKeySpec(key.toByteArray(), ALGORITHM_HMAC_SHA1)
-    return Mac.getInstance(ALGORITHM_HMAC_SHA1).run {
-        init(keySpec)
-        doFinal(text.toByteArray()).encodeBase64().encodeOAuth()
-    }
-}
+public actual fun suspendTest(body: suspend CoroutineScope.() -> Unit): Unit = runBlocking { body() }
